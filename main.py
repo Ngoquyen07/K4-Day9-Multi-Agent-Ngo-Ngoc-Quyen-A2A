@@ -77,14 +77,14 @@ def run_pipeline():
 
     print(f"Successfully processed {len(output_files_created)} cases into output/")
 
-    # Zip 50 output files directly at root of output.zip per README Section 8 standard
+    # Zip 50 output files containing output/EC_001.json to output/EC_050.json per explicit requirement
     zip_filename = "output.zip"
-    print(f"Creating {zip_filename} containing exact 50 JSON files at root...")
+    print(f"Creating {zip_filename} containing output/EC_001.json -> output/EC_050.json...")
     with zipfile.ZipFile(zip_filename, "w", zipfile.ZIP_DEFLATED) as zipf:
         for out_file in output_files_created:
-            zipf.write(out_file, arcname=os.path.basename(out_file))
+            zipf.write(out_file, arcname=f"output/{os.path.basename(out_file)}")
 
-    print(f"File {zip_filename} created containing {len(output_files_created)} JSON files at zip root.")
+    print(f"File {zip_filename} created containing {len(output_files_created)} JSON files under output/ folder.")
 
 if __name__ == "__main__":
     run_pipeline()
