@@ -20,9 +20,9 @@ if hasattr(sys.stdout, "reconfigure"):
 
 class CoordinatorAgent:
     """
-    Coordinator / Supervisor Agent:
+    Coordinator / Supervisor Agent (LLM-Enhanced Multi-Agent Branch):
     Orchestrates execution flow across all sub-agents, aggregates results,
-    invokes LLM (nvidia/nemotron-nano-9b-v2:free via OpenRouter) for supervisor reasoning,
+    invokes OpenRouter API (nvidia/nemotron-nano-9b-v2:free) for LLM reasoning,
     constructs standard output JSON schema, verifies contract compliance,
     and logs execution traces into trace.jsonl.
     """
@@ -39,7 +39,7 @@ class CoordinatorAgent:
         self.order_product_agent = OrderProductAgent(data_loader)
         self.payment_agent = PaymentAgent(data_loader)
         self.delivery_agent = DeliveryAgent(data_loader)
-        self.policy_agent = PolicyAgent()
+        self.policy_agent = PolicyAgent(self.llm_client)
         self.verifier_agent = VerifierAgent()
 
     def _log(self, text: str):
@@ -104,7 +104,7 @@ class CoordinatorAgent:
         self._log(f"  |   +-- Output: Delivery Variance = {delivery_res['delivery_variance_hours']} hrs | Late Delivery = {delivery_res['is_late_delivery']} | Late Sellers = {delivery_res['late_handoff_seller_ids']}")
 
         # 6. Policy Agent
-        self._log("  |-- [PolicyAgent] Evaluating EC_POLICY_V2 decision matrix...")
+        self._log("  |-- [PolicyAgent] Evaluating EC_POLICY_V2 decision matrix with LLM reasoning...")
         policy_res = self.policy_agent.apply_policy(
             order_id=claimed_order_id,
             order_status=order_status,
@@ -115,7 +115,7 @@ class CoordinatorAgent:
         )
         self.tracer.log_step(case_id, "PolicyAgent", "HANDOFF", policy_res)
 
-        # 7. LLM Reasoning Call (nvidia/nemotron-nano-9b-v2:free via OpenRouter)
+        # 7. Supervisor LLM Reasoning Call (nvidia/nemotron-nano-9b-v2:free via OpenRouter)
         llm_reasoning_text = ""
         llm_content_text = ""
         if self.llm_client and self.llm_client.client:

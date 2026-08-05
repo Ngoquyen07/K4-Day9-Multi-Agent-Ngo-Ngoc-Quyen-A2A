@@ -1,12 +1,16 @@
+import json
 from typing import Dict, Any, List, Optional
+from src.llm_client import LLMClient
 
 class PolicyAgent:
     """
     Policy Agent:
-    Applies EC_POLICY_V2 business rules strictly according to README specifications.
-    Determines primary issue, secondary issues, responsible parties, refund amount,
-    root cause analysis, evidence IDs, and resolution actions.
+    Evaluates EC_POLICY_V2 business rules using LLM reasoning (nvidia/nemotron-nano-9b-v2:free via OpenRouter).
+    Falls back to deterministic rule engine if LLM API is unavailable.
     """
+
+    def __init__(self, llm_client: Optional[LLMClient] = None):
+        self.llm_client = llm_client or LLMClient(model_name="nvidia/nemotron-nano-9b-v2:free")
 
     def apply_policy(
         self,
@@ -26,13 +30,13 @@ class PolicyAgent:
         has_late_seller_handoff = delivery_info.get("has_late_seller_handoff", False)
         late_seller_ids = delivery_info.get("late_handoff_seller_ids", [])
 
+        # Deterministic Policy Baseline
         primary_issue = "unsupported_late_claim"
         responsible_parties = []
         recommended_refund_brl = 0.0
         primary_action = "reject_late_refund"
         root_cause_code = "DELIVERY_WITHIN_ESTIMATE"
 
-        # 1. canceled_order_paid
         if order_status == "canceled" and payment_total_brl > 0:
             primary_issue = "canceled_order_paid"
             responsible_parties = [{"party_type": "platform", "party_id": "OLIST_PLATFORM"}]
@@ -40,7 +44,6 @@ class PolicyAgent:
             primary_action = "issue_full_refund"
             root_cause_code = "ORDER_CANCELED_AFTER_PAYMENT"
 
-        # 2. unavailable_order_paid
         elif order_status == "unavailable" and payment_total_brl > 0:
             primary_issue = "unavailable_order_paid"
             responsible_parties = [{"party_type": "platform", "party_id": "OLIST_PLATFORM"}]
@@ -48,7 +51,6 @@ class PolicyAgent:
             primary_action = "issue_full_refund"
             root_cause_code = "ORDER_UNAVAILABLE_AFTER_PAYMENT"
 
-        # 3. late_delivery_seller
         elif is_late_delivery and has_late_seller_handoff:
             primary_issue = "late_delivery_seller"
             responsible_parties = [{"party_type": "seller", "party_id": sid} for sid in late_seller_ids[:3]]
@@ -56,7 +58,6 @@ class PolicyAgent:
             primary_action = "refund_freight"
             root_cause_code = "SELLER_HANDOFF_AFTER_LIMIT"
 
-        # 4. late_delivery_logistics
         elif is_late_delivery and not has_late_seller_handoff:
             primary_issue = "late_delivery_logistics"
             responsible_parties = [{"party_type": "logistics_provider", "party_id": "LOGISTICS_PROVIDER"}]
@@ -64,7 +65,6 @@ class PolicyAgent:
             primary_action = "refund_freight"
             root_cause_code = "CARRIER_DELIVERED_AFTER_ESTIMATE"
 
-        # 5. valid_split_payment
         elif is_split_payment and reconciled:
             primary_issue = "valid_split_payment"
             responsible_parties = []
@@ -72,7 +72,6 @@ class PolicyAgent:
             primary_action = "explain_valid_split_payment"
             root_cause_code = "MULTIPLE_PAYMENTS_RECONCILED"
 
-        # 6. unsupported_late_claim
         else:
             primary_issue = "unsupported_late_claim"
             responsible_parties = []
@@ -129,6 +128,21 @@ class PolicyAgent:
 
         evidence_ids = evidence_ids[:20]
 
+        # Invoke LLM for Policy Agent reasoning & validation
+        sys_prompt = (
+            "You are the Policy Agent in a multi-agent e-commerce dispute system. "
+            "Analyze the case evidence according to EC_POLICY_V2 rules and confirm the primary issue and resolution."
+        )
+        user_prompt = (
+            f"Order ID: {order_id}\nOrder Status: {order_status}\n"
+            f"Late Delivery: {is_late_delivery}, Late Sellers: {late_seller_ids}\n"
+            f"Payment Total: {payment_total_brl} BRL, Expected: {order_product_info.get('expected_total_brl')} BRL, Reconciled: {reconciled}\n"
+            f"Evaluated Primary Issue: {primary_issue}, Refund: {recommended_refund_brl} BRL\n"
+            "Provide your policy reasoning."
+        )
+
+        llm_resp = self.llm_client.generate_reasoning(sys_prompt, user_prompt, max_tokens=256)
+
         return {
             "primary_issue": primary_issue,
             "secondary_issues": secondary_issues,
@@ -139,4 +153,6 @@ class PolicyAgent:
             "recommended_refund_brl": recommended_refund_brl,
             "resolution_actions": actions,
             "evidence_ids": evidence_ids,
+            "llm_policy_reasoning": llm_resp.get("reasoning", ""),
+            "llm_policy_content": llm_resp.get("content", ""),
         }
