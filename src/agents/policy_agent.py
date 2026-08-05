@@ -5,8 +5,8 @@ from src.llm_client import LLMClient
 class PolicyAgent:
     """
     Policy Agent:
-    Evaluates EC_POLICY_V2 business rules using LLM reasoning (nvidia/nemotron-nano-9b-v2:free via OpenRouter).
-    Falls back to deterministic rule engine if LLM API is disabled or unavailable.
+    Evaluates EC_POLICY_V2 business rules matrix.
+    Incorporates LLM reasoning via OpenRouter API (nvidia/nemotron-nano-9b-v2:free) when enabled.
     """
 
     def __init__(self, llm_client: Optional[LLMClient] = None):
@@ -30,7 +30,7 @@ class PolicyAgent:
         has_late_seller_handoff = delivery_info.get("has_late_seller_handoff", False)
         late_seller_ids = delivery_info.get("late_handoff_seller_ids", [])
 
-        # Deterministic Policy Baseline
+        # Priority Matrix EC_POLICY_V2 Evaluation
         primary_issue = "unsupported_late_claim"
         responsible_parties = []
         recommended_refund_brl = 0.0
@@ -81,7 +81,7 @@ class PolicyAgent:
 
         recommended_refund_brl = round(recommended_refund_brl, 2)
 
-        # Secondary issues strictly in sequence
+        # Secondary issues strictly in sequence per Section 4 table
         secondary_issues = []
         if order_product_info.get("is_multi_item"):
             secondary_issues.append("multi_item_order")
@@ -94,7 +94,7 @@ class PolicyAgent:
         if order_product_info.get("is_multi_category"):
             secondary_issues.append("multiple_categories")
 
-        # Resolution Actions sequence
+        # Resolution Actions sequence (max 5)
         actions = [primary_action]
         if primary_issue == "late_delivery_seller":
             actions.append("review_seller_handoff")
@@ -115,7 +115,7 @@ class PolicyAgent:
         # Case Status
         case_status = "action_required" if recommended_refund_brl > 0 else "no_action"
 
-        # Complete Evidence IDs construction (Order, Items, Payments, Sellers, Policy)
+        # Evidence IDs construction (Order, Items, Payments, Sellers, Policy)
         evidence_ids = [f"order:{order_id}"]
         for i_id in order_product_info.get("item_ids", []):
             evidence_ids.append(f"item:{i_id}")
@@ -125,7 +125,7 @@ class PolicyAgent:
             evidence_ids.append(f"seller:{s_id}")
         evidence_ids.append(f"policy:{root_cause_code}")
 
-        # Deduplicate while preserving order
+        # Preserve order while deduplicating
         seen = set()
         dedup_evidence = []
         for ev in evidence_ids:

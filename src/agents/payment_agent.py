@@ -1,56 +1,46 @@
-from typing import Dict, Any, List, Optional
+from typing import Dict, Any, List
 from src.data_loader import OlistDataLoader
 
 class PaymentAgent:
     """
     Payment Agent:
-    Retrieves payment records, computes total payments, reconciles against expected total,
-    and identifies split payments.
-    Enforces README schema: payment_ids max 5.
+    Reconciles payment transactions against expected order total BRL.
     """
 
     def __init__(self, data_loader: OlistDataLoader):
         self.data_loader = data_loader
 
-    def analyze(self, order_id: str, expected_total_brl: Optional[float]) -> Dict[str, Any]:
+    def analyze(self, order_id: str, expected_total_brl: float) -> Dict[str, Any]:
         payments = self.data_loader.get_order_payments(order_id)
-        if not payments:
-            return {
-                "payments": [],
-                "payment_ids": [],
-                "payment_total_brl": 0.0,
-                "difference_brl": None,
-                "reconciled": None,
-                "payment_types": [],
-                "is_split_payment": False,
-            }
 
-        payment_ids = [f"{order_id}:{p['payment_sequential']}" for p in payments][:5]
-
-        payment_total_brl = 0.0
+        payment_ids = []
         payment_types = []
+        payment_total_brl = 0.0
 
-        for p in payments:
-            payment_total_brl += p["payment_value"]
-            ptype = p["payment_type"]
-            if ptype not in payment_types:
+        for pay in payments:
+            seq = pay.get("payment_sequential")
+            payment_ids.append(f"{order_id}:{seq}")
+
+            ptype = str(pay.get("payment_type", ""))
+            if ptype and ptype not in payment_types:
                 payment_types.append(ptype)
 
-        payment_total_brl = round(payment_total_brl, 2)
+            val = float(pay.get("payment_value", 0.0))
+            payment_total_brl += val
 
-        if expected_total_brl is not None:
-            difference_brl = round(payment_total_brl - expected_total_brl, 2)
-            reconciled = abs(difference_brl) <= 0.10
-        else:
-            difference_brl = None
-            reconciled = None
+        payment_total_brl = round(payment_total_brl, 2)
+        difference_brl = round(payment_total_brl - expected_total_brl, 2)
+
+        # Reconciled if absolute difference is <= 0.10 BRL per README Section 4
+        reconciled = abs(difference_brl) <= 0.10
+        is_split_payment = len(payments) > 1
 
         return {
             "payments": payments,
             "payment_ids": payment_ids,
+            "payment_types": payment_types,
             "payment_total_brl": payment_total_brl,
             "difference_brl": difference_brl,
             "reconciled": reconciled,
-            "payment_types": payment_types,
-            "is_split_payment": len(payments) >= 2,
+            "is_split_payment": is_split_payment,
         }

@@ -1,6 +1,6 @@
 import sys
 import json
-from typing import Dict, Any
+from typing import Dict, Any, Optional
 from src.data_loader import OlistDataLoader
 from src.llm_client import LLMClient
 from src.agents.customer_agent import CustomerAgent
@@ -20,11 +20,11 @@ if hasattr(sys.stdout, "reconfigure"):
 
 class CoordinatorAgent:
     """
-    Coordinator / Supervisor Agent (LLM-Enhanced Multi-Agent Branch):
+    Coordinator / Supervisor Agent:
     Orchestrates execution flow across all sub-agents, aggregates results,
     invokes OpenRouter API (nvidia/nemotron-nano-9b-v2:free) for LLM reasoning,
     constructs standard output JSON schema, verifies contract compliance,
-    and logs execution traces into trace.jsonl.
+    and logs execution trace into trace.jsonl.
     """
 
     def __init__(self, data_loader: OlistDataLoader, tracer: ExecutionTracer, verbose: bool = True, use_llm: bool = True):
@@ -115,7 +115,7 @@ class CoordinatorAgent:
         )
         self.tracer.log_step(case_id, "PolicyAgent", "HANDOFF", policy_res)
 
-        # 7. Supervisor LLM Reasoning Call (nvidia/nemotron-nano-9b-v2:free via OpenRouter)
+        # 7. Supervisor LLM Reasoning Call
         llm_reasoning_text = ""
         llm_content_text = ""
         if self.llm_client and self.llm_client.client:
@@ -136,13 +136,6 @@ class CoordinatorAgent:
                 self._log(f"  |   |-- LLM CoT Reasoning: {llm_reasoning_text[:200]}...")
             if llm_content_text:
                 self._log(f"  |   +-- LLM Synthesis: {llm_content_text[:200]}...")
-
-        self._log(f"  |   |-- Reasoning Matrix Evaluation:")
-        self._log(f"  |   |   |-- Primary Issue  : '{policy_res['primary_issue']}' (Root Cause: {policy_res['ranked_causes'][0]['cause_code']})")
-        self._log(f"  |   |   |-- Secondary Issues: {policy_res['secondary_issues']}")
-        self._log(f"  |   |   |-- Responsible    : {policy_res['responsible_parties']}")
-        self._log(f"  |   |   +-- Refund Amount  : {policy_res['recommended_refund_brl']} BRL")
-        self._log(f"  |   +-- Output Actions: {policy_res['resolution_actions']}")
 
         # Handle null values for no-item orders per README Section 4
         has_items = len(op_res["items"]) > 0

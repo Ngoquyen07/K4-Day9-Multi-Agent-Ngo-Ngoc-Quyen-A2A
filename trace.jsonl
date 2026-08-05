@@ -77,8 +77,8 @@
 {"case_id": "EC_011", "agent": "VerifierAgent", "step_type": "VERIFICATION_PASSED", "details": {}}
 {"case_id": "EC_012", "agent": "CoordinatorAgent", "step_type": "START_CASE", "details": {"claimed_order_id": "73628c6d02ed8f6134d9752cd7b83c2a"}}
 {"case_id": "EC_012", "agent": "CustomerAgent", "step_type": "HANDOFF", "details": {"customer_unique_id": "0a5fab743da859b3f10a409bbb132a5a", "related_order_ids": ["dee008fbad3f3868874dd10ab5977b88"], "has_repeat_customer": true}}
-{"case_id": "EC_012", "agent": "OrderProductAgent", "step_type": "HANDOFF", "details": {"item_count": 0, "expected_total_brl": null}}
-{"case_id": "EC_012", "agent": "PaymentAgent", "step_type": "HANDOFF", "details": {"payment_total_brl": 226.23, "reconciled": null}}
+{"case_id": "EC_012", "agent": "OrderProductAgent", "step_type": "HANDOFF", "details": {"item_count": 0, "expected_total_brl": 0.0}}
+{"case_id": "EC_012", "agent": "PaymentAgent", "step_type": "HANDOFF", "details": {"payment_total_brl": 226.23, "reconciled": false}}
 {"case_id": "EC_012", "agent": "DeliveryAgent", "step_type": "HANDOFF", "details": {"delivery_variance_hours": null, "late_sellers": []}}
 {"case_id": "EC_012", "agent": "PolicyAgent", "step_type": "HANDOFF", "details": {"primary_issue": "unavailable_order_paid", "secondary_issues": ["repeat_customer"], "case_status": "action_required", "confidence": 0.95, "ranked_causes": [{"cause_code": "ORDER_UNAVAILABLE_AFTER_PAYMENT", "rank": 1}], "responsible_parties": [{"party_type": "platform", "party_id": "OLIST_PLATFORM"}], "recommended_refund_brl": 226.23, "resolution_actions": ["issue_full_refund", "verify_refund_completion", "verify_payment_allocation"], "evidence_ids": ["order:73628c6d02ed8f6134d9752cd7b83c2a", "payment:73628c6d02ed8f6134d9752cd7b83c2a:1", "policy:ORDER_UNAVAILABLE_AFTER_PAYMENT"], "llm_policy_reasoning": "", "llm_policy_content": ""}}
 {"case_id": "EC_012", "agent": "VerifierAgent", "step_type": "VERIFICATION_PASSED", "details": {}}
@@ -210,8 +210,8 @@
 {"case_id": "EC_030", "agent": "VerifierAgent", "step_type": "VERIFICATION_PASSED", "details": {}}
 {"case_id": "EC_031", "agent": "CoordinatorAgent", "step_type": "START_CASE", "details": {"claimed_order_id": "72fa449394ed9dc9093819f93ca563af"}}
 {"case_id": "EC_031", "agent": "CustomerAgent", "step_type": "HANDOFF", "details": {"customer_unique_id": "af51e8dd1c30737ba2dd0ece8cfa294d", "related_order_ids": ["b6b73b9c0cab8ac7a2b02a49623d4cfe"], "has_repeat_customer": true}}
-{"case_id": "EC_031", "agent": "OrderProductAgent", "step_type": "HANDOFF", "details": {"item_count": 0, "expected_total_brl": null}}
-{"case_id": "EC_031", "agent": "PaymentAgent", "step_type": "HANDOFF", "details": {"payment_total_brl": 138.92, "reconciled": null}}
+{"case_id": "EC_031", "agent": "OrderProductAgent", "step_type": "HANDOFF", "details": {"item_count": 0, "expected_total_brl": 0.0}}
+{"case_id": "EC_031", "agent": "PaymentAgent", "step_type": "HANDOFF", "details": {"payment_total_brl": 138.92, "reconciled": false}}
 {"case_id": "EC_031", "agent": "DeliveryAgent", "step_type": "HANDOFF", "details": {"delivery_variance_hours": null, "late_sellers": []}}
 {"case_id": "EC_031", "agent": "PolicyAgent", "step_type": "HANDOFF", "details": {"primary_issue": "unavailable_order_paid", "secondary_issues": ["repeat_customer"], "case_status": "action_required", "confidence": 0.95, "ranked_causes": [{"cause_code": "ORDER_UNAVAILABLE_AFTER_PAYMENT", "rank": 1}], "responsible_parties": [{"party_type": "platform", "party_id": "OLIST_PLATFORM"}], "recommended_refund_brl": 138.92, "resolution_actions": ["issue_full_refund", "verify_refund_completion", "verify_payment_allocation"], "evidence_ids": ["order:72fa449394ed9dc9093819f93ca563af", "payment:72fa449394ed9dc9093819f93ca563af:1", "policy:ORDER_UNAVAILABLE_AFTER_PAYMENT"], "llm_policy_reasoning": "", "llm_policy_content": ""}}
 {"case_id": "EC_031", "agent": "VerifierAgent", "step_type": "VERIFICATION_PASSED", "details": {}}
@@ -224,22 +224,22 @@
 {"case_id": "EC_032", "agent": "VerifierAgent", "step_type": "VERIFICATION_PASSED", "details": {}}
 {"case_id": "EC_033", "agent": "CoordinatorAgent", "step_type": "START_CASE", "details": {"claimed_order_id": "edefc0fa09c98cc491e9d2cf95ee4a5f"}}
 {"case_id": "EC_033", "agent": "CustomerAgent", "step_type": "HANDOFF", "details": {"customer_unique_id": "f019bdb8008924769fe88319cddedda9", "related_order_ids": ["b345a3528956237e1d8907b94d5e5829"], "has_repeat_customer": true}}
-{"case_id": "EC_033", "agent": "OrderProductAgent", "step_type": "HANDOFF", "details": {"item_count": 0, "expected_total_brl": null}}
-{"case_id": "EC_033", "agent": "PaymentAgent", "step_type": "HANDOFF", "details": {"payment_total_brl": 35.96, "reconciled": null}}
+{"case_id": "EC_033", "agent": "OrderProductAgent", "step_type": "HANDOFF", "details": {"item_count": 0, "expected_total_brl": 0.0}}
+{"case_id": "EC_033", "agent": "PaymentAgent", "step_type": "HANDOFF", "details": {"payment_total_brl": 35.96, "reconciled": false}}
 {"case_id": "EC_033", "agent": "DeliveryAgent", "step_type": "HANDOFF", "details": {"delivery_variance_hours": null, "late_sellers": []}}
 {"case_id": "EC_033", "agent": "PolicyAgent", "step_type": "HANDOFF", "details": {"primary_issue": "unavailable_order_paid", "secondary_issues": ["repeat_customer"], "case_status": "action_required", "confidence": 0.95, "ranked_causes": [{"cause_code": "ORDER_UNAVAILABLE_AFTER_PAYMENT", "rank": 1}], "responsible_parties": [{"party_type": "platform", "party_id": "OLIST_PLATFORM"}], "recommended_refund_brl": 35.96, "resolution_actions": ["issue_full_refund", "verify_refund_completion", "verify_payment_allocation"], "evidence_ids": ["order:edefc0fa09c98cc491e9d2cf95ee4a5f", "payment:edefc0fa09c98cc491e9d2cf95ee4a5f:1", "policy:ORDER_UNAVAILABLE_AFTER_PAYMENT"], "llm_policy_reasoning": "", "llm_policy_content": ""}}
 {"case_id": "EC_033", "agent": "VerifierAgent", "step_type": "VERIFICATION_PASSED", "details": {}}
 {"case_id": "EC_034", "agent": "CoordinatorAgent", "step_type": "START_CASE", "details": {"claimed_order_id": "b210c676cae65f95f7e08a49d195e1a1"}}
 {"case_id": "EC_034", "agent": "CustomerAgent", "step_type": "HANDOFF", "details": {"customer_unique_id": "ec9c7ebb2a345ccd42c46b94ecb4d319", "related_order_ids": ["0b1e73fa546894ad7310916b480de067"], "has_repeat_customer": true}}
-{"case_id": "EC_034", "agent": "OrderProductAgent", "step_type": "HANDOFF", "details": {"item_count": 0, "expected_total_brl": null}}
-{"case_id": "EC_034", "agent": "PaymentAgent", "step_type": "HANDOFF", "details": {"payment_total_brl": 85.14, "reconciled": null}}
+{"case_id": "EC_034", "agent": "OrderProductAgent", "step_type": "HANDOFF", "details": {"item_count": 0, "expected_total_brl": 0.0}}
+{"case_id": "EC_034", "agent": "PaymentAgent", "step_type": "HANDOFF", "details": {"payment_total_brl": 85.14, "reconciled": false}}
 {"case_id": "EC_034", "agent": "DeliveryAgent", "step_type": "HANDOFF", "details": {"delivery_variance_hours": null, "late_sellers": []}}
 {"case_id": "EC_034", "agent": "PolicyAgent", "step_type": "HANDOFF", "details": {"primary_issue": "unavailable_order_paid", "secondary_issues": ["repeat_customer"], "case_status": "action_required", "confidence": 0.95, "ranked_causes": [{"cause_code": "ORDER_UNAVAILABLE_AFTER_PAYMENT", "rank": 1}], "responsible_parties": [{"party_type": "platform", "party_id": "OLIST_PLATFORM"}], "recommended_refund_brl": 85.14, "resolution_actions": ["issue_full_refund", "verify_refund_completion", "verify_payment_allocation"], "evidence_ids": ["order:b210c676cae65f95f7e08a49d195e1a1", "payment:b210c676cae65f95f7e08a49d195e1a1:1", "policy:ORDER_UNAVAILABLE_AFTER_PAYMENT"], "llm_policy_reasoning": "", "llm_policy_content": ""}}
 {"case_id": "EC_034", "agent": "VerifierAgent", "step_type": "VERIFICATION_PASSED", "details": {}}
 {"case_id": "EC_035", "agent": "CoordinatorAgent", "step_type": "START_CASE", "details": {"claimed_order_id": "ae443cb420061bab1f2c5e3ad279fde8"}}
 {"case_id": "EC_035", "agent": "CustomerAgent", "step_type": "HANDOFF", "details": {"customer_unique_id": "6e14116d3471123fcf057c203fd7e801", "related_order_ids": ["f442020e13b718d40746ce039d97b4c2"], "has_repeat_customer": true}}
-{"case_id": "EC_035", "agent": "OrderProductAgent", "step_type": "HANDOFF", "details": {"item_count": 0, "expected_total_brl": null}}
-{"case_id": "EC_035", "agent": "PaymentAgent", "step_type": "HANDOFF", "details": {"payment_total_brl": 132.37, "reconciled": null}}
+{"case_id": "EC_035", "agent": "OrderProductAgent", "step_type": "HANDOFF", "details": {"item_count": 0, "expected_total_brl": 0.0}}
+{"case_id": "EC_035", "agent": "PaymentAgent", "step_type": "HANDOFF", "details": {"payment_total_brl": 132.37, "reconciled": false}}
 {"case_id": "EC_035", "agent": "DeliveryAgent", "step_type": "HANDOFF", "details": {"delivery_variance_hours": null, "late_sellers": []}}
 {"case_id": "EC_035", "agent": "PolicyAgent", "step_type": "HANDOFF", "details": {"primary_issue": "unavailable_order_paid", "secondary_issues": ["repeat_customer"], "case_status": "action_required", "confidence": 0.95, "ranked_causes": [{"cause_code": "ORDER_UNAVAILABLE_AFTER_PAYMENT", "rank": 1}], "responsible_parties": [{"party_type": "platform", "party_id": "OLIST_PLATFORM"}], "recommended_refund_brl": 132.37, "resolution_actions": ["issue_full_refund", "verify_refund_completion", "verify_payment_allocation"], "evidence_ids": ["order:ae443cb420061bab1f2c5e3ad279fde8", "payment:ae443cb420061bab1f2c5e3ad279fde8:1", "policy:ORDER_UNAVAILABLE_AFTER_PAYMENT"], "llm_policy_reasoning": "", "llm_policy_content": ""}}
 {"case_id": "EC_035", "agent": "VerifierAgent", "step_type": "VERIFICATION_PASSED", "details": {}}
@@ -294,8 +294,8 @@
 {"case_id": "EC_042", "agent": "VerifierAgent", "step_type": "VERIFICATION_PASSED", "details": {}}
 {"case_id": "EC_043", "agent": "CoordinatorAgent", "step_type": "START_CASE", "details": {"claimed_order_id": "e58fb7bfd033514475ab0883ded704f4"}}
 {"case_id": "EC_043", "agent": "CustomerAgent", "step_type": "HANDOFF", "details": {"customer_unique_id": "8cda74bcb48b709a90e5441e19b1d759", "related_order_ids": ["ceb533871105f7cda81fafc19e1ee38e"], "has_repeat_customer": true}}
-{"case_id": "EC_043", "agent": "OrderProductAgent", "step_type": "HANDOFF", "details": {"item_count": 0, "expected_total_brl": null}}
-{"case_id": "EC_043", "agent": "PaymentAgent", "step_type": "HANDOFF", "details": {"payment_total_brl": 18.37, "reconciled": null}}
+{"case_id": "EC_043", "agent": "OrderProductAgent", "step_type": "HANDOFF", "details": {"item_count": 0, "expected_total_brl": 0.0}}
+{"case_id": "EC_043", "agent": "PaymentAgent", "step_type": "HANDOFF", "details": {"payment_total_brl": 18.37, "reconciled": false}}
 {"case_id": "EC_043", "agent": "DeliveryAgent", "step_type": "HANDOFF", "details": {"delivery_variance_hours": null, "late_sellers": []}}
 {"case_id": "EC_043", "agent": "PolicyAgent", "step_type": "HANDOFF", "details": {"primary_issue": "unavailable_order_paid", "secondary_issues": ["repeat_customer"], "case_status": "action_required", "confidence": 0.95, "ranked_causes": [{"cause_code": "ORDER_UNAVAILABLE_AFTER_PAYMENT", "rank": 1}], "responsible_parties": [{"party_type": "platform", "party_id": "OLIST_PLATFORM"}], "recommended_refund_brl": 18.37, "resolution_actions": ["issue_full_refund", "verify_refund_completion", "verify_payment_allocation"], "evidence_ids": ["order:e58fb7bfd033514475ab0883ded704f4", "payment:e58fb7bfd033514475ab0883ded704f4:1", "policy:ORDER_UNAVAILABLE_AFTER_PAYMENT"], "llm_policy_reasoning": "", "llm_policy_content": ""}}
 {"case_id": "EC_043", "agent": "VerifierAgent", "step_type": "VERIFICATION_PASSED", "details": {}}
