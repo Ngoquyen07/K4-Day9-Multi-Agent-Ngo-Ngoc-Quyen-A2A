@@ -115,18 +115,25 @@ class PolicyAgent:
         # Case Status
         case_status = "action_required" if recommended_refund_brl > 0 else "no_action"
 
-        # Evidence IDs construction
+        # Complete Evidence IDs construction (Order, Items, Payments, Sellers, Policy)
         evidence_ids = [f"order:{order_id}"]
         for i_id in order_product_info.get("item_ids", []):
             evidence_ids.append(f"item:{i_id}")
         for p_id in payment_info.get("payment_ids", []):
             evidence_ids.append(f"payment:{p_id}")
-        for rp in responsible_parties:
-            if rp["party_type"] == "seller":
-                evidence_ids.append(f"seller:{rp['party_id']}")
+        for s_id in order_product_info.get("seller_ids", []):
+            evidence_ids.append(f"seller:{s_id}")
         evidence_ids.append(f"policy:{root_cause_code}")
 
-        evidence_ids = evidence_ids[:20]
+        # Deduplicate while preserving order
+        seen = set()
+        dedup_evidence = []
+        for ev in evidence_ids:
+            if ev not in seen:
+                seen.add(ev)
+                dedup_evidence.append(ev)
+
+        evidence_ids = dedup_evidence[:20]
 
         llm_policy_reasoning = ""
         llm_policy_content = ""

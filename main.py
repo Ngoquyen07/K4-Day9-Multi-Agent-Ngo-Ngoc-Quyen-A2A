@@ -1,5 +1,6 @@
 import os
 import json
+import shutil
 import zipfile
 from tqdm import tqdm
 from src.data_loader import OlistDataLoader
@@ -9,6 +10,7 @@ from src.agents.coordinator_agent import CoordinatorAgent
 def ensure_directories():
     os.makedirs("input", exist_ok=True)
     os.makedirs("output", exist_ok=True)
+    os.makedirs("logging", exist_ok=True)
 
 def generate_sample_inputs_if_empty(loader: OlistDataLoader, count: int = 50):
     """
@@ -76,6 +78,12 @@ def run_pipeline():
         output_files_created.append(output_path)
 
     print(f"Successfully processed {len(output_files_created)} cases into output/")
+
+    # Sync trace.jsonl and metadata.json to logging/
+    if os.path.exists("trace.jsonl"):
+        shutil.copy("trace.jsonl", "logging/trace.jsonl")
+    if os.path.exists("metadata.json"):
+        shutil.copy("metadata.json", "logging/metadata.json")
 
     # Zip 50 output files containing output/EC_001.json to output/EC_050.json per explicit requirement
     zip_filename = "output.zip"
