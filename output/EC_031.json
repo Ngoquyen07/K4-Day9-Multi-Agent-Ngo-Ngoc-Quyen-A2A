@@ -1,9 +1,9 @@
 {
   "case_id": "EC_031",
   "case_assessment": {
-    "primary_issue": "unavailable_order_paid",
+    "primary_issue": "ORDER_UNAVAILABLE_AFTER_PAYMENT",
     "secondary_issues": [
-      "repeat_customer"
+      "MULTIPLE_PAYMENTS_RECONCILED"
     ],
     "case_status": "action_required",
     "confidence": 0.95
@@ -15,7 +15,7 @@
     "item_ids": [],
     "seller_ids": [],
     "payment_ids": [
-      "72fa449394ed9dc9093819f93ca563af:1"
+      "72fa449394ed9dc9093819f93ca563af.1"
     ]
   },
   "customer_context": {
@@ -49,31 +49,15 @@
     ]
   },
   "root_cause_analysis": {
-    "ranked_causes": [
-      {
-        "cause_code": "ORDER_UNAVAILABLE_AFTER_PAYMENT",
-        "rank": 1
-      }
-    ],
-    "responsible_parties": [
-      {
-        "party_type": "platform",
-        "party_id": "OLIST_PLATFORM"
-      }
-    ]
+    "ranked_causes": [],
+    "responsible_parties": []
   },
-  "evidence_ids": [
-    "order:72fa449394ed9dc9093819f93ca563af",
-    "payment:72fa449394ed9dc9093819f93ca563af:1",
-    "policy:ORDER_UNAVAILABLE_AFTER_PAYMENT"
-  ],
+  "evidence_ids": [],
   "financial_resolution": {
     "currency": "BRL",
-    "recommended_refund_brl": 138.92
+    "recommended_refund_brl": 0.0
   },
   "resolution_actions": [
-    "issue_full_refund",
-    "verify_refund_completion",
-    "verify_payment_allocation"
+    "review_carrier_delay"
   ]
 }

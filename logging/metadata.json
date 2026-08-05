@@ -1,6 +1,0 @@
-{
-  "model": "nvidia/nemotron-nano-9b-v2:free",
-  "parameter_size": "9B",
-  "framework": "Python, Pandas, OpenAI API, Custom Multi-Agent Architecture",
-  "runtime": "Python 3.13"
-}

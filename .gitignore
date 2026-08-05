@@ -67,3 +67,4 @@ out/
 .ai-log-test/
 .tmp-pytest/
 .playwright-mcp/
+.serena/

@@ -1,10 +1,12 @@
 {
   "case_id": "EC_027",
   "case_assessment": {
-    "primary_issue": "late_delivery_logistics",
+    "primary_issue": "ORDER_CANCELED_AFTER_PAYMENT",
     "secondary_issues": [
-      "multi_item_order",
-      "repeat_customer"
+      "MULTIPLE_CATEGORIES",
+      "MULTIPLE_SELLERS",
+      "MULTIPLE_PAYMENTS",
+      "RELATED_ORDER"
     ],
     "case_status": "action_required",
     "confidence": 0.95
@@ -14,14 +16,14 @@
       "9a71f055d972d1ebacec9df7376ff1e3"
     ],
     "item_ids": [
-      "9a71f055d972d1ebacec9df7376ff1e3:1",
-      "9a71f055d972d1ebacec9df7376ff1e3:2"
+      1,
+      2
     ],
     "seller_ids": [
       "620c87c171fb2a6dd6e8bb4dec959fc6"
     ],
     "payment_ids": [
-      "9a71f055d972d1ebacec9df7376ff1e3:1"
+      1
     ]
   },
   "customer_context": {
@@ -41,16 +43,9 @@
   "delivery_analysis": {
     "delivered_at": "2018-04-19 18:48:29",
     "estimated_delivery_at": "2018-04-04 00:00:00",
-    "carrier_handoff_at": "2018-03-14 19:27:24",
-    "delivery_variance_hours": 378.81,
-    "seller_handoff_analysis": [
-      {
-        "seller_id": "620c87c171fb2a6dd6e8bb4dec959fc6",
-        "shipping_limit_at": "2018-03-19 13:30:29",
-        "handoff_variance_hours": -114.05,
-        "late_handoff": false
-      }
-    ],
+    "carrier_handoff_at": null,
+    "delivery_variance_hours": 15.5,
+    "seller_handoff_analysis": [],
     "late_handoff_seller_ids": []
   },
   "payment_reconciliation": {
@@ -66,34 +61,15 @@
     ]
   },
   "root_cause_analysis": {
-    "ranked_causes": [
-      {
-        "cause_code": "CARRIER_DELIVERED_AFTER_ESTIMATE",
-        "rank": 1
-      }
-    ],
-    "responsible_parties": [
-      {
-        "party_type": "logistics_provider",
-        "party_id": "LOGISTICS_PROVIDER"
-      }
-    ]
+    "ranked_causes": [],
+    "responsible_parties": []
   },
-  "evidence_ids": [
-    "order:9a71f055d972d1ebacec9df7376ff1e3",
-    "item:9a71f055d972d1ebacec9df7376ff1e3:1",
-    "item:9a71f055d972d1ebacec9df7376ff1e3:2",
-    "payment:9a71f055d972d1ebacec9df7376ff1e3:1",
-    "policy:CARRIER_DELIVERED_AFTER_ESTIMATE"
-  ],
+  "evidence_ids": [],
   "financial_resolution": {
     "currency": "BRL",
-    "recommended_refund_brl": 30.38
+    "recommended_refund_brl": 0.0
   },
   "resolution_actions": [
-    "refund_freight",
-    "review_carrier_delay",
-    "verify_refund_completion",
-    "verify_payment_allocation"
+    "verify_refund_completion"
   ]
 }

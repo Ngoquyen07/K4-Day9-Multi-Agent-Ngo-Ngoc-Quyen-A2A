@@ -3,7 +3,11 @@
   "case_assessment": {
     "primary_issue": "canceled_order_paid",
     "secondary_issues": [
-      "multi_item_order"
+      "multi_item_order",
+      "multi_seller_order",
+      "split_payment",
+      "repeat_customer",
+      "multiple_categories"
     ],
     "case_status": "action_required",
     "confidence": 0.95
@@ -13,14 +17,14 @@
       "6560fb10610771449cb0463c5ba12199"
     ],
     "item_ids": [
-      "6560fb10610771449cb0463c5ba12199:1",
-      "6560fb10610771449cb0463c5ba12199:2"
+      1,
+      2
     ],
     "seller_ids": [
       "897060da8b9a21f655304d50fd935913"
     ],
     "payment_ids": [
-      "6560fb10610771449cb0463c5ba12199:1"
+      1
     ]
   },
   "customer_context": {
@@ -45,44 +49,28 @@
   },
   "payment_reconciliation": {
     "currency": "BRL",
-    "item_total_brl": 300.0,
-    "freight_total_brl": 33.62,
-    "expected_total_brl": 333.62,
+    "item_total_brl": null,
+    "freight_total_brl": null,
+    "expected_total_brl": null,
     "payment_total_brl": 333.62,
-    "difference_brl": 0.0,
-    "reconciled": true,
+    "difference_brl": null,
+    "reconciled": null,
     "payment_types": [
       "credit_card"
     ]
   },
   "root_cause_analysis": {
-    "ranked_causes": [
-      {
-        "cause_code": "ORDER_CANCELED_AFTER_PAYMENT",
-        "rank": 1
-      }
-    ],
-    "responsible_parties": [
-      {
-        "party_type": "platform",
-        "party_id": "OLIST_PLATFORM"
-      }
-    ]
+    "ranked_causes": [],
+    "responsible_parties": []
   },
-  "evidence_ids": [
-    "order:6560fb10610771449cb0463c5ba12199",
-    "item:6560fb10610771449cb0463c5ba12199:1",
-    "item:6560fb10610771449cb0463c5ba12199:2",
-    "payment:6560fb10610771449cb0463c5ba12199:1",
-    "policy:ORDER_CANCELED_AFTER_PAYMENT"
-  ],
+  "evidence_ids": [],
   "financial_resolution": {
     "currency": "BRL",
-    "recommended_refund_brl": 333.62
+    "recommended_refund_brl": 0.0
   },
   "resolution_actions": [
-    "issue_full_refund",
     "verify_refund_completion",
+    "coordinate_multi_seller_case",
     "verify_payment_allocation"
   ]
 }

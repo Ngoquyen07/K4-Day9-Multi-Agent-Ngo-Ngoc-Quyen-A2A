@@ -1,10 +1,13 @@
 {
   "case_id": "EC_019",
   "case_assessment": {
-    "primary_issue": "late_delivery_seller",
+    "primary_issue": "ORDER_CANCELED_AFTER_PAYMENT",
     "secondary_issues": [
-      "multi_item_order",
-      "repeat_customer"
+      "MULTI_ITEM_ORDER",
+      "MULTI_SELLER_ORDER",
+      "SPLIT_PAYMENT",
+      "REPEAT_CUSTOMER",
+      "MULTIPLE_CATEGORIES"
     ],
     "case_status": "action_required",
     "confidence": 0.95
@@ -14,14 +17,14 @@
       "a4e90af1c84c4455c7c4c65293ae2c78"
     ],
     "item_ids": [
-      "a4e90af1c84c4455c7c4c65293ae2c78:1",
-      "a4e90af1c84c4455c7c4c65293ae2c78:2"
+      1,
+      2
     ],
     "seller_ids": [
       "4a3ca9315b744ce9f8e9374361493884"
     ],
     "payment_ids": [
-      "a4e90af1c84c4455c7c4c65293ae2c78:1"
+      1
     ]
   },
   "customer_context": {
@@ -43,61 +46,30 @@
     "delivered_at": "2017-05-22 15:25:48",
     "estimated_delivery_at": "2017-05-10 00:00:00",
     "carrier_handoff_at": "2017-05-02 13:54:14",
-    "delivery_variance_hours": 303.43,
-    "seller_handoff_analysis": [
-      {
-        "seller_id": "4a3ca9315b744ce9f8e9374361493884",
-        "shipping_limit_at": "2017-04-27 12:36:44",
-        "handoff_variance_hours": 121.29,
-        "late_handoff": true
-      }
-    ],
-    "late_handoff_seller_ids": [
-      "4a3ca9315b744ce9f8e9374361493884"
-    ]
+    "delivery_variance_hours": "12.25",
+    "seller_handoff_analysis": [],
+    "late_handoff_seller_ids": []
   },
   "payment_reconciliation": {
     "currency": "BRL",
-    "item_total_brl": 97.8,
-    "freight_total_brl": 23.48,
-    "expected_total_brl": 121.28,
-    "payment_total_brl": 121.28,
-    "difference_brl": 0.0,
+    "item_total_brl": "97.80",
+    "freight_total_brl": "23.48",
+    "expected_total_brl": "121.28",
+    "payment_total_brl": "121.28",
+    "difference_brl": "0.00",
     "reconciled": true,
     "payment_types": [
       "credit_card"
     ]
   },
   "root_cause_analysis": {
-    "ranked_causes": [
-      {
-        "cause_code": "SELLER_HANDOFF_AFTER_LIMIT",
-        "rank": 1
-      }
-    ],
-    "responsible_parties": [
-      {
-        "party_type": "seller",
-        "party_id": "4a3ca9315b744ce9f8e9374361493884"
-      }
-    ]
+    "ranked_causes": [],
+    "responsible_parties": []
   },
-  "evidence_ids": [
-    "order:a4e90af1c84c4455c7c4c65293ae2c78",
-    "item:a4e90af1c84c4455c7c4c65293ae2c78:1",
-    "item:a4e90af1c84c4455c7c4c65293ae2c78:2",
-    "payment:a4e90af1c84c4455c7c4c65293ae2c78:1",
-    "seller:4a3ca9315b744ce9f8e9374361493884",
-    "policy:SELLER_HANDOFF_AFTER_LIMIT"
-  ],
+  "evidence_ids": [],
   "financial_resolution": {
     "currency": "BRL",
-    "recommended_refund_brl": 23.48
+    "recommended_refund_brl": "0.00"
   },
-  "resolution_actions": [
-    "refund_freight",
-    "review_seller_handoff",
-    "verify_refund_completion",
-    "verify_payment_allocation"
-  ]
+  "resolution_actions": []
 }
