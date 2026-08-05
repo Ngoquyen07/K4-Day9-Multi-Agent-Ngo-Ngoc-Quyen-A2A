@@ -1,0 +1,142 @@
+from typing import Dict, Any, List, Optional
+
+class PolicyAgent:
+    """
+    Policy Agent:
+    Applies EC_POLICY_V2 business rules strictly according to README specifications.
+    Determines primary issue, secondary issues, responsible parties, refund amount,
+    root cause analysis, evidence IDs, and resolution actions.
+    """
+
+    def apply_policy(
+        self,
+        order_id: str,
+        order_status: Optional[str],
+        customer_info: Dict[str, Any],
+        order_product_info: Dict[str, Any],
+        payment_info: Dict[str, Any],
+        delivery_info: Dict[str, Any],
+    ) -> Dict[str, Any]:
+
+        payment_total_brl = payment_info.get("payment_total_brl", 0.0)
+        freight_total_brl = order_product_info.get("freight_total_brl", 0.0) or 0.0
+        reconciled = payment_info.get("reconciled", True)
+        is_split_payment = payment_info.get("is_split_payment", False)
+        is_late_delivery = delivery_info.get("is_late_delivery", False)
+        has_late_seller_handoff = delivery_info.get("has_late_seller_handoff", False)
+        late_seller_ids = delivery_info.get("late_handoff_seller_ids", [])
+
+        primary_issue = "unsupported_late_claim"
+        responsible_parties = []
+        recommended_refund_brl = 0.0
+        primary_action = "reject_late_refund"
+        root_cause_code = "DELIVERY_WITHIN_ESTIMATE"
+
+        # 1. canceled_order_paid
+        if order_status == "canceled" and payment_total_brl > 0:
+            primary_issue = "canceled_order_paid"
+            responsible_parties = [{"party_type": "platform", "party_id": "OLIST_PLATFORM"}]
+            recommended_refund_brl = payment_total_brl
+            primary_action = "issue_full_refund"
+            root_cause_code = "ORDER_CANCELED_AFTER_PAYMENT"
+
+        # 2. unavailable_order_paid
+        elif order_status == "unavailable" and payment_total_brl > 0:
+            primary_issue = "unavailable_order_paid"
+            responsible_parties = [{"party_type": "platform", "party_id": "OLIST_PLATFORM"}]
+            recommended_refund_brl = payment_total_brl
+            primary_action = "issue_full_refund"
+            root_cause_code = "ORDER_UNAVAILABLE_AFTER_PAYMENT"
+
+        # 3. late_delivery_seller
+        elif is_late_delivery and has_late_seller_handoff:
+            primary_issue = "late_delivery_seller"
+            responsible_parties = [{"party_type": "seller", "party_id": sid} for sid in late_seller_ids[:3]]
+            recommended_refund_brl = freight_total_brl
+            primary_action = "refund_freight"
+            root_cause_code = "SELLER_HANDOFF_AFTER_LIMIT"
+
+        # 4. late_delivery_logistics
+        elif is_late_delivery and not has_late_seller_handoff:
+            primary_issue = "late_delivery_logistics"
+            responsible_parties = [{"party_type": "logistics_provider", "party_id": "LOGISTICS_PROVIDER"}]
+            recommended_refund_brl = freight_total_brl
+            primary_action = "refund_freight"
+            root_cause_code = "CARRIER_DELIVERED_AFTER_ESTIMATE"
+
+        # 5. valid_split_payment
+        elif is_split_payment and reconciled:
+            primary_issue = "valid_split_payment"
+            responsible_parties = []
+            recommended_refund_brl = 0.0
+            primary_action = "explain_valid_split_payment"
+            root_cause_code = "MULTIPLE_PAYMENTS_RECONCILED"
+
+        # 6. unsupported_late_claim
+        else:
+            primary_issue = "unsupported_late_claim"
+            responsible_parties = []
+            recommended_refund_brl = 0.0
+            primary_action = "reject_late_refund"
+            root_cause_code = "DELIVERY_WITHIN_ESTIMATE"
+
+        recommended_refund_brl = round(recommended_refund_brl, 2)
+
+        # Secondary issues strictly in sequence
+        secondary_issues = []
+        if order_product_info.get("is_multi_item"):
+            secondary_issues.append("multi_item_order")
+        if order_product_info.get("is_multi_seller"):
+            secondary_issues.append("multi_seller_order")
+        if is_split_payment:
+            secondary_issues.append("split_payment")
+        if customer_info.get("has_repeat_customer"):
+            secondary_issues.append("repeat_customer")
+        if order_product_info.get("is_multi_category"):
+            secondary_issues.append("multiple_categories")
+
+        # Resolution Actions sequence
+        actions = [primary_action]
+        if primary_issue == "late_delivery_seller":
+            actions.append("review_seller_handoff")
+        elif primary_issue == "late_delivery_logistics":
+            actions.append("review_carrier_delay")
+
+        if recommended_refund_brl > 0:
+            actions.append("verify_refund_completion")
+
+        if "multi_seller_order" in secondary_issues:
+            actions.append("coordinate_multi_seller_case")
+
+        if primary_issue != "valid_split_payment":
+            actions.append("verify_payment_allocation")
+
+        actions = actions[:5]
+
+        # Case Status
+        case_status = "action_required" if recommended_refund_brl > 0 else "no_action"
+
+        # Evidence IDs construction
+        evidence_ids = [f"order:{order_id}"]
+        for i_id in order_product_info.get("item_ids", []):
+            evidence_ids.append(f"item:{i_id}")
+        for p_id in payment_info.get("payment_ids", []):
+            evidence_ids.append(f"payment:{p_id}")
+        for rp in responsible_parties:
+            if rp["party_type"] == "seller":
+                evidence_ids.append(f"seller:{rp['party_id']}")
+        evidence_ids.append(f"policy:{root_cause_code}")
+
+        evidence_ids = evidence_ids[:20]
+
+        return {
+            "primary_issue": primary_issue,
+            "secondary_issues": secondary_issues,
+            "case_status": case_status,
+            "confidence": 0.95,
+            "ranked_causes": [{"cause_code": root_cause_code, "rank": 1}],
+            "responsible_parties": responsible_parties[:3],
+            "recommended_refund_brl": recommended_refund_brl,
+            "resolution_actions": actions,
+            "evidence_ids": evidence_ids,
+        }

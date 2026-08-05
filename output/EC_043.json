@@ -1,0 +1,85 @@
+{
+  "case_id": "EC_043",
+  "case_assessment": {
+    "primary_issue": "unsupported_late_claim",
+    "secondary_issues": [],
+    "case_status": "no_action",
+    "confidence": 0.95
+  },
+  "affected_entities": {
+    "order_ids": [
+      "948097deef559c742e7ce321e5e58919"
+    ],
+    "item_ids": [
+      "948097deef559c742e7ce321e5e58919:1"
+    ],
+    "seller_ids": [
+      "a3a38f4affed601eb87a97788c949667"
+    ],
+    "payment_ids": [
+      "948097deef559c742e7ce321e5e58919:1"
+    ]
+  },
+  "customer_context": {
+    "customer_unique_id": "4ca5f90433afb5493247f0bafb583483",
+    "related_order_ids": []
+  },
+  "product_context": {
+    "product_ids": [
+      "cd935d283d47f1050c505e1c39c48b67"
+    ],
+    "category_names": [
+      "sports_leisure"
+    ]
+  },
+  "delivery_analysis": {
+    "delivered_at": "2017-08-12 14:08:40",
+    "estimated_delivery_at": "2017-09-01 00:00:00",
+    "carrier_handoff_at": "2017-08-07 17:52:01",
+    "delivery_variance_hours": -465.86,
+    "seller_handoff_analysis": [
+      {
+        "seller_id": "a3a38f4affed601eb87a97788c949667",
+        "shipping_limit_at": "2017-08-10 17:25:11",
+        "handoff_variance_hours": -71.55,
+        "late_handoff": false
+      }
+    ],
+    "late_handoff_seller_ids": []
+  },
+  "payment_reconciliation": {
+    "currency": "BRL",
+    "item_total_brl": 69.9,
+    "freight_total_brl": 25.77,
+    "expected_total_brl": 95.67,
+    "payment_total_brl": 95.67,
+    "difference_brl": 0.0,
+    "reconciled": true,
+    "payment_types": [
+      "credit_card"
+    ]
+  },
+  "root_cause_analysis": {
+    "ranked_causes": [
+      {
+        "cause_code": "DELIVERY_WITHIN_ESTIMATE",
+        "rank": 1
+      }
+    ],
+    "responsible_parties": []
+  },
+  "evidence_ids": [
+    "order:948097deef559c742e7ce321e5e58919",
+    "item:948097deef559c742e7ce321e5e58919:1",
+    "payment:948097deef559c742e7ce321e5e58919:1",
+    "policy:DELIVERY_WITHIN_ESTIMATE"
+  ],
+  "financial_resolution": {
+    "currency": "BRL",
+    "recommended_refund_brl": 0.0
+  },
+  "resolution_actions": [
+    "reject_late_refund",
+    "verify_payment_allocation"
+  ]
+}

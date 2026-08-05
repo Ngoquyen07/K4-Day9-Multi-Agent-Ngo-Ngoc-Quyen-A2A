@@ -1,0 +1,99 @@
+{
+  "case_id": "EC_027",
+  "case_assessment": {
+    "primary_issue": "unsupported_late_claim",
+    "secondary_issues": [
+      "multi_item_order",
+      "multi_seller_order"
+    ],
+    "case_status": "no_action",
+    "confidence": 0.95
+  },
+  "affected_entities": {
+    "order_ids": [
+      "acce194856392f074dbf9dada14d8d82"
+    ],
+    "item_ids": [
+      "acce194856392f074dbf9dada14d8d82:1",
+      "acce194856392f074dbf9dada14d8d82:2"
+    ],
+    "seller_ids": [
+      "977f9f63dd360c2a32ece2f93ad6d306",
+      "d673a59aac7a70d8b01e6902bf090a11"
+    ],
+    "payment_ids": [
+      "acce194856392f074dbf9dada14d8d82:1"
+    ]
+  },
+  "customer_context": {
+    "customer_unique_id": "576ea0cab426cd8a00fad9a9c90a4494",
+    "related_order_ids": []
+  },
+  "product_context": {
+    "product_ids": [
+      "d70f38e7f79c630f8ea00c993897042c",
+      "9451e630d725c4bb7a5a206b48b99486"
+    ],
+    "category_names": [
+      "baby"
+    ]
+  },
+  "delivery_analysis": {
+    "delivered_at": "2018-06-16 15:20:55",
+    "estimated_delivery_at": "2018-07-18 00:00:00",
+    "carrier_handoff_at": "2018-06-05 13:24:00",
+    "delivery_variance_hours": -752.65,
+    "seller_handoff_analysis": [
+      {
+        "seller_id": "977f9f63dd360c2a32ece2f93ad6d306",
+        "shipping_limit_at": "2018-06-13 00:35:10",
+        "handoff_variance_hours": -179.19,
+        "late_handoff": false
+      },
+      {
+        "seller_id": "d673a59aac7a70d8b01e6902bf090a11",
+        "shipping_limit_at": "2018-06-13 00:35:10",
+        "handoff_variance_hours": -179.19,
+        "late_handoff": false
+      }
+    ],
+    "late_handoff_seller_ids": []
+  },
+  "payment_reconciliation": {
+    "currency": "BRL",
+    "item_total_brl": 130.4,
+    "freight_total_brl": 97.28,
+    "expected_total_brl": 227.68,
+    "payment_total_brl": 227.68,
+    "difference_brl": 0.0,
+    "reconciled": true,
+    "payment_types": [
+      "credit_card"
+    ]
+  },
+  "root_cause_analysis": {
+    "ranked_causes": [
+      {
+        "cause_code": "DELIVERY_WITHIN_ESTIMATE",
+        "rank": 1
+      }
+    ],
+    "responsible_parties": []
+  },
+  "evidence_ids": [
+    "order:acce194856392f074dbf9dada14d8d82",
+    "item:acce194856392f074dbf9dada14d8d82:1",
+    "item:acce194856392f074dbf9dada14d8d82:2",
+    "payment:acce194856392f074dbf9dada14d8d82:1",
+    "policy:DELIVERY_WITHIN_ESTIMATE"
+  ],
+  "financial_resolution": {
+    "currency": "BRL",
+    "recommended_refund_brl": 0.0
+  },
+  "resolution_actions": [
+    "reject_late_refund",
+    "coordinate_multi_seller_case",
+    "verify_payment_allocation"
+  ]
+}

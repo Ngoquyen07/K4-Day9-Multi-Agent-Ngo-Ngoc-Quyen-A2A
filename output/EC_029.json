@@ -1,0 +1,87 @@
+{
+  "case_id": "EC_029",
+  "case_assessment": {
+    "primary_issue": "unsupported_late_claim",
+    "secondary_issues": [],
+    "case_status": "no_action",
+    "confidence": 0.95
+  },
+  "affected_entities": {
+    "order_ids": [
+      "91b2a010e1e45e6ba3d133fa997597be"
+    ],
+    "item_ids": [
+      "91b2a010e1e45e6ba3d133fa997597be:1"
+    ],
+    "seller_ids": [
+      "7d13fca15225358621be4086e1eb0964"
+    ],
+    "payment_ids": [
+      "91b2a010e1e45e6ba3d133fa997597be:1"
+    ]
+  },
+  "customer_context": {
+    "customer_unique_id": "bd13608b9c6033892ce62269b50a0afc",
+    "related_order_ids": []
+  },
+  "product_context": {
+    "product_ids": [
+      "ba74c6b75d2ad7503175809688d5a03c"
+    ],
+    "category_names": [
+      "watches_gifts"
+    ]
+  },
+  "delivery_analysis": {
+    "delivered_at": "2018-05-16 20:56:24",
+    "estimated_delivery_at": "2018-05-23 00:00:00",
+    "carrier_handoff_at": "2018-05-10 16:16:00",
+    "delivery_variance_hours": -147.06,
+    "seller_handoff_analysis": [
+      {
+        "seller_id": "7d13fca15225358621be4086e1eb0964",
+        "shipping_limit_at": "2018-05-09 12:55:01",
+        "handoff_variance_hours": 27.35,
+        "late_handoff": true
+      }
+    ],
+    "late_handoff_seller_ids": [
+      "7d13fca15225358621be4086e1eb0964"
+    ]
+  },
+  "payment_reconciliation": {
+    "currency": "BRL",
+    "item_total_brl": 178.99,
+    "freight_total_brl": 13.69,
+    "expected_total_brl": 192.68,
+    "payment_total_brl": 192.68,
+    "difference_brl": 0.0,
+    "reconciled": true,
+    "payment_types": [
+      "credit_card"
+    ]
+  },
+  "root_cause_analysis": {
+    "ranked_causes": [
+      {
+        "cause_code": "DELIVERY_WITHIN_ESTIMATE",
+        "rank": 1
+      }
+    ],
+    "responsible_parties": []
+  },
+  "evidence_ids": [
+    "order:91b2a010e1e45e6ba3d133fa997597be",
+    "item:91b2a010e1e45e6ba3d133fa997597be:1",
+    "payment:91b2a010e1e45e6ba3d133fa997597be:1",
+    "policy:DELIVERY_WITHIN_ESTIMATE"
+  ],
+  "financial_resolution": {
+    "currency": "BRL",
+    "recommended_refund_brl": 0.0
+  },
+  "resolution_actions": [
+    "reject_late_refund",
+    "verify_payment_allocation"
+  ]
+}

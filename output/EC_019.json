@@ -1,0 +1,85 @@
+{
+  "case_id": "EC_019",
+  "case_assessment": {
+    "primary_issue": "unsupported_late_claim",
+    "secondary_issues": [],
+    "case_status": "no_action",
+    "confidence": 0.95
+  },
+  "affected_entities": {
+    "order_ids": [
+      "85ce859fd6dc634de8d2f1e290444043"
+    ],
+    "item_ids": [
+      "85ce859fd6dc634de8d2f1e290444043:1"
+    ],
+    "seller_ids": [
+      "d2374cbcbb3ca4ab1086534108cc3ab7"
+    ],
+    "payment_ids": [
+      "85ce859fd6dc634de8d2f1e290444043:1"
+    ]
+  },
+  "customer_context": {
+    "customer_unique_id": "d0ff1a7468fcc46b8fc658ab35d2a12c",
+    "related_order_ids": []
+  },
+  "product_context": {
+    "product_ids": [
+      "cce679660c66e6fbd5c8091dfd29e9cd"
+    ],
+    "category_names": [
+      "bed_bath_table"
+    ]
+  },
+  "delivery_analysis": {
+    "delivered_at": "2017-11-27 18:28:00",
+    "estimated_delivery_at": "2017-12-11 00:00:00",
+    "carrier_handoff_at": "2017-11-23 21:32:26",
+    "delivery_variance_hours": -317.53,
+    "seller_handoff_analysis": [
+      {
+        "seller_id": "d2374cbcbb3ca4ab1086534108cc3ab7",
+        "shipping_limit_at": "2017-11-29 00:14:22",
+        "handoff_variance_hours": -122.7,
+        "late_handoff": false
+      }
+    ],
+    "late_handoff_seller_ids": []
+  },
+  "payment_reconciliation": {
+    "currency": "BRL",
+    "item_total_brl": 17.9,
+    "freight_total_brl": 11.85,
+    "expected_total_brl": 29.75,
+    "payment_total_brl": 29.75,
+    "difference_brl": 0.0,
+    "reconciled": true,
+    "payment_types": [
+      "credit_card"
+    ]
+  },
+  "root_cause_analysis": {
+    "ranked_causes": [
+      {
+        "cause_code": "DELIVERY_WITHIN_ESTIMATE",
+        "rank": 1
+      }
+    ],
+    "responsible_parties": []
+  },
+  "evidence_ids": [
+    "order:85ce859fd6dc634de8d2f1e290444043",
+    "item:85ce859fd6dc634de8d2f1e290444043:1",
+    "payment:85ce859fd6dc634de8d2f1e290444043:1",
+    "policy:DELIVERY_WITHIN_ESTIMATE"
+  ],
+  "financial_resolution": {
+    "currency": "BRL",
+    "recommended_refund_brl": 0.0
+  },
+  "resolution_actions": [
+    "reject_late_refund",
+    "verify_payment_allocation"
+  ]
+}

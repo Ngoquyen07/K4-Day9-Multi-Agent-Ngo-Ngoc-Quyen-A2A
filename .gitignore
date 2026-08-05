@@ -1,0 +1,69 @@
+# Python
+__pycache__/
+*.py[cod]
+*.so
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# Virtual environments
+venv/
+.venv/
+env/
+
+# Environment variables
+.env
+.env.local
+.env.production
+
+# IDE
+.vscode/
+.idea/
+.codex/hooks.json
+*.swp
+*.swo
+*~
+
+# Data (never commit large data)
+data/*
+!data/AGENTS.md
+*.db
+*.sqlite3
+
+# Logs
+logs/
+*.log
+test_trace.jsonl
+
+# Test coverage
+htmlcov/
+.coverage
+coverage.xml
+
+# Docker
+docker-compose.override.yml
+
+# Node (frontend)
+node_modules/
+.next/
+out/
+.nuxt/
+
+# Build
+*.pyc
+*.pyo
+
+# AI logs — tracked structure, ignored content
+.ai-log/*.jsonl
+.ai-log/archive/
+.ua/.trash-*/
+.ua/tmp/
+.ua/dashboard-*.log
+.ua/npm-cache/
+.ua/vite-cache/
+.ua/viewer/
+.ua/dashboard-build.config.mjs
+.ai-log-test/
+.tmp-pytest/
+.playwright-mcp/

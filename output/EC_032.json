@@ -1,0 +1,85 @@
+{
+  "case_id": "EC_032",
+  "case_assessment": {
+    "primary_issue": "unsupported_late_claim",
+    "secondary_issues": [],
+    "case_status": "no_action",
+    "confidence": 0.95
+  },
+  "affected_entities": {
+    "order_ids": [
+      "1790eea0b567cf50911c057cf20f90f9"
+    ],
+    "item_ids": [
+      "1790eea0b567cf50911c057cf20f90f9:1"
+    ],
+    "seller_ids": [
+      "d91fb3b7d041e83b64a00a3edfb37e4f"
+    ],
+    "payment_ids": [
+      "1790eea0b567cf50911c057cf20f90f9:1"
+    ]
+  },
+  "customer_context": {
+    "customer_unique_id": "a6fefcd9f434474cf6fcd8ed1102fd63",
+    "related_order_ids": []
+  },
+  "product_context": {
+    "product_ids": [
+      "2d8f2be4f08788ee3bf5356af2b2ee6c"
+    ],
+    "category_names": [
+      "air_conditioning"
+    ]
+  },
+  "delivery_analysis": {
+    "delivered_at": "2018-05-05 12:28:34",
+    "estimated_delivery_at": "2018-05-15 00:00:00",
+    "carrier_handoff_at": "2018-04-18 13:05:09",
+    "delivery_variance_hours": -227.52,
+    "seller_handoff_analysis": [
+      {
+        "seller_id": "d91fb3b7d041e83b64a00a3edfb37e4f",
+        "shipping_limit_at": "2018-04-22 22:10:26",
+        "handoff_variance_hours": -105.09,
+        "late_handoff": false
+      }
+    ],
+    "late_handoff_seller_ids": []
+  },
+  "payment_reconciliation": {
+    "currency": "BRL",
+    "item_total_brl": 186.9,
+    "freight_total_brl": 38.0,
+    "expected_total_brl": 224.9,
+    "payment_total_brl": 224.9,
+    "difference_brl": 0.0,
+    "reconciled": true,
+    "payment_types": [
+      "credit_card"
+    ]
+  },
+  "root_cause_analysis": {
+    "ranked_causes": [
+      {
+        "cause_code": "DELIVERY_WITHIN_ESTIMATE",
+        "rank": 1
+      }
+    ],
+    "responsible_parties": []
+  },
+  "evidence_ids": [
+    "order:1790eea0b567cf50911c057cf20f90f9",
+    "item:1790eea0b567cf50911c057cf20f90f9:1",
+    "payment:1790eea0b567cf50911c057cf20f90f9:1",
+    "policy:DELIVERY_WITHIN_ESTIMATE"
+  ],
+  "financial_resolution": {
+    "currency": "BRL",
+    "recommended_refund_brl": 0.0
+  },
+  "resolution_actions": [
+    "reject_late_refund",
+    "verify_payment_allocation"
+  ]
+}

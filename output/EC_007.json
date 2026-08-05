@@ -1,0 +1,76 @@
+{
+  "case_id": "EC_007",
+  "case_assessment": {
+    "primary_issue": "unsupported_late_claim",
+    "secondary_issues": [],
+    "case_status": "no_action",
+    "confidence": 0.95
+  },
+  "affected_entities": {
+    "order_ids": [
+      "136cce7faa42fdb2cefd53fdc79a6098"
+    ],
+    "item_ids": [
+      "136cce7faa42fdb2cefd53fdc79a6098:1"
+    ],
+    "seller_ids": [
+      "dc8798cbf453b7e0f98745e396cc5616"
+    ],
+    "payment_ids": [
+      "136cce7faa42fdb2cefd53fdc79a6098:1"
+    ]
+  },
+  "customer_context": {
+    "customer_unique_id": "36edbb3fb164b1f16485364b6fb04c73",
+    "related_order_ids": []
+  },
+  "product_context": {
+    "product_ids": [
+      "a1804276d9941ac0733cfd409f5206eb"
+    ],
+    "category_names": []
+  },
+  "delivery_analysis": {
+    "delivered_at": null,
+    "estimated_delivery_at": "2017-05-09 00:00:00",
+    "carrier_handoff_at": null,
+    "delivery_variance_hours": null,
+    "seller_handoff_analysis": [],
+    "late_handoff_seller_ids": []
+  },
+  "payment_reconciliation": {
+    "currency": "BRL",
+    "item_total_brl": 49.9,
+    "freight_total_brl": 16.05,
+    "expected_total_brl": 65.95,
+    "payment_total_brl": 65.95,
+    "difference_brl": 0.0,
+    "reconciled": true,
+    "payment_types": [
+      "credit_card"
+    ]
+  },
+  "root_cause_analysis": {
+    "ranked_causes": [
+      {
+        "cause_code": "DELIVERY_WITHIN_ESTIMATE",
+        "rank": 1
+      }
+    ],
+    "responsible_parties": []
+  },
+  "evidence_ids": [
+    "order:136cce7faa42fdb2cefd53fdc79a6098",
+    "item:136cce7faa42fdb2cefd53fdc79a6098:1",
+    "payment:136cce7faa42fdb2cefd53fdc79a6098:1",
+    "policy:DELIVERY_WITHIN_ESTIMATE"
+  ],
+  "financial_resolution": {
+    "currency": "BRL",
+    "recommended_refund_brl": 0.0
+  },
+  "resolution_actions": [
+    "reject_late_refund",
+    "verify_payment_allocation"
+  ]
+}
