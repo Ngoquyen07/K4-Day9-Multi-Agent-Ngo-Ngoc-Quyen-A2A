@@ -10,7 +10,7 @@
       "multiple_categories"
     ],
     "case_status": "no_action",
-    "confidence": 1.0
+    "confidence": 0.95
   },
   "affected_entities": {
     "order_ids": [
@@ -25,8 +25,8 @@
       "d20b021d3efdf267a402c402a48ea64b"
     ],
     "payment_ids": [
-      "b69321fb7d3000994c5a2b55c4f3cb01:2",
-      "b69321fb7d3000994c5a2b55c4f3cb01:1"
+      "b69321fb7d3000994c5a2b55c4f3cb01:1",
+      "b69321fb7d3000994c5a2b55c4f3cb01:2"
     ]
   },
   "customer_context": {
@@ -41,8 +41,8 @@
       "8adde8ed66e628e94f29b9832156ab08"
     ],
     "category_names": [
-      "bed_bath_table",
-      "furniture_decor"
+      "cama_mesa_banho",
+      "moveis_decoracao"
     ]
   },
   "delivery_analysis": {
@@ -75,8 +75,8 @@
     "difference_brl": 0.0,
     "reconciled": true,
     "payment_types": [
-      "voucher",
-      "credit_card"
+      "credit_card",
+      "voucher"
     ]
   },
   "root_cause_analysis": {
@@ -92,8 +92,8 @@
     "order:b69321fb7d3000994c5a2b55c4f3cb01",
     "item:b69321fb7d3000994c5a2b55c4f3cb01:1",
     "item:b69321fb7d3000994c5a2b55c4f3cb01:2",
-    "payment:b69321fb7d3000994c5a2b55c4f3cb01:2",
     "payment:b69321fb7d3000994c5a2b55c4f3cb01:1",
+    "payment:b69321fb7d3000994c5a2b55c4f3cb01:2",
     "policy:MULTIPLE_PAYMENTS_RECONCILED"
   ],
   "financial_resolution": {

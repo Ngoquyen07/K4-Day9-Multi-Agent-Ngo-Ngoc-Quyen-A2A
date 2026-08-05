@@ -7,7 +7,7 @@
       "split_payment"
     ],
     "case_status": "action_required",
-    "confidence": 1.0
+    "confidence": 0.94
   },
   "affected_entities": {
     "order_ids": [
@@ -21,8 +21,8 @@
       "cca3071e3e9bb7d12640c9fbe2301306"
     ],
     "payment_ids": [
-      "0e3ec3c17b64c6cc7bc01bba21e7afdf:2",
-      "0e3ec3c17b64c6cc7bc01bba21e7afdf:1"
+      "0e3ec3c17b64c6cc7bc01bba21e7afdf:1",
+      "0e3ec3c17b64c6cc7bc01bba21e7afdf:2"
     ]
   },
   "customer_context": {
@@ -34,7 +34,7 @@
       "c857b96593773e940454e76efa8eabb3"
     ],
     "category_names": [
-      "furniture_decor"
+      "moveis_decoracao"
     ]
   },
   "delivery_analysis": {
@@ -63,8 +63,8 @@
     "difference_brl": 0.0,
     "reconciled": true,
     "payment_types": [
-      "voucher",
-      "credit_card"
+      "credit_card",
+      "voucher"
     ]
   },
   "root_cause_analysis": {
@@ -85,8 +85,8 @@
     "order:0e3ec3c17b64c6cc7bc01bba21e7afdf",
     "item:0e3ec3c17b64c6cc7bc01bba21e7afdf:1",
     "item:0e3ec3c17b64c6cc7bc01bba21e7afdf:2",
-    "payment:0e3ec3c17b64c6cc7bc01bba21e7afdf:2",
     "payment:0e3ec3c17b64c6cc7bc01bba21e7afdf:1",
+    "payment:0e3ec3c17b64c6cc7bc01bba21e7afdf:2",
     "seller:cca3071e3e9bb7d12640c9fbe2301306",
     "policy:SELLER_HANDOFF_AFTER_LIMIT"
   ],
