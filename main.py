@@ -12,7 +12,7 @@ def ensure_directories():
 
 def generate_sample_inputs_if_empty(loader: OlistDataLoader, count: int = 50):
     """
-    If input/ directory is empty or only contains non-EC files, populates 50 sample cases.
+    If input/ directory is empty, populates 50 benchmark input files.
     """
     existing_inputs = [f for f in os.listdir("input") if f.startswith("EC_") and f.endswith(".json")]
     if len(existing_inputs) >= count:
@@ -77,14 +77,14 @@ def run_pipeline():
 
     print(f"Successfully processed {len(output_files_created)} cases into output/")
 
-    # Zip output folder with output/ folder prefix inside output.zip
+    # Zip 50 output files directly at root of output.zip per README Section 8 standard
     zip_filename = "output.zip"
-    print(f"Creating {zip_filename} with output/ folder prefix...")
+    print(f"Creating {zip_filename} containing exact 50 JSON files at root...")
     with zipfile.ZipFile(zip_filename, "w", zipfile.ZIP_DEFLATED) as zipf:
         for out_file in output_files_created:
-            zipf.write(out_file, arcname=f"output/{os.path.basename(out_file)}")
+            zipf.write(out_file, arcname=os.path.basename(out_file))
 
-    print(f"File {zip_filename} created containing 50 JSON files under output/ directory.")
+    print(f"File {zip_filename} created containing {len(output_files_created)} JSON files at zip root.")
 
 if __name__ == "__main__":
     run_pipeline()
