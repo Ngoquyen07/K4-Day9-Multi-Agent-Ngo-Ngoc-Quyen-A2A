@@ -1,31 +1,28 @@
 {
   "case_id": "EC_013",
   "case_assessment": {
-    "primary_issue": "ORDER_CANCELED_AFTER_PAYMENT",
+    "primary_issue": "late_delivery_seller",
     "secondary_issues": [
-      "MULTIPLE_ITEM_ORDER",
-      "MULTIPLE_SELLER_ORDER",
-      "SPLIT_PAYMENT",
-      "REPEAT_CUSTOMER",
-      "MULTIPLE_CATEGORIES"
+      "multi_item_order",
+      "split_payment"
     ],
     "case_status": "action_required",
-    "confidence": 0.95
+    "confidence": 1.0
   },
   "affected_entities": {
     "order_ids": [
       "97e8d3eb8f48e3610beed991e5f32296"
     ],
     "item_ids": [
-      1,
-      2
+      "97e8d3eb8f48e3610beed991e5f32296:1",
+      "97e8d3eb8f48e3610beed991e5f32296:2"
     ],
     "seller_ids": [
       "4d6d651bd7684af3fffabd5f08d12e5a"
     ],
     "payment_ids": [
-      1,
-      2
+      "97e8d3eb8f48e3610beed991e5f32296:1",
+      "97e8d3eb8f48e3610beed991e5f32296:2"
     ]
   },
   "customer_context": {
@@ -38,7 +35,6 @@
       "ce066f4a83649651549d717c9b566816"
     ],
     "category_names": [
-      "sports_leisure",
       "sports_leisure"
     ]
   },
@@ -46,9 +42,18 @@
     "delivered_at": "2017-12-11 19:17:19",
     "estimated_delivery_at": "2017-12-07 00:00:00",
     "carrier_handoff_at": "2017-11-21 20:16:07",
-    "delivery_variance_hours": 4.67,
-    "seller_handoff_analysis": [],
-    "late_handoff_seller_ids": []
+    "delivery_variance_hours": 115.29,
+    "seller_handoff_analysis": [
+      {
+        "seller_id": "4d6d651bd7684af3fffabd5f08d12e5a",
+        "shipping_limit_at": "2017-11-21 17:55:28",
+        "handoff_variance_hours": 2.34,
+        "late_handoff": true
+      }
+    ],
+    "late_handoff_seller_ids": [
+      "4d6d651bd7684af3fffabd5f08d12e5a"
+    ]
   },
   "payment_reconciliation": {
     "currency": "BRL",
@@ -64,15 +69,36 @@
     ]
   },
   "root_cause_analysis": {
-    "ranked_causes": [],
-    "responsible_parties": []
+    "ranked_causes": [
+      {
+        "cause_code": "SELLER_HANDOFF_AFTER_LIMIT",
+        "rank": 1
+      }
+    ],
+    "responsible_parties": [
+      {
+        "party_type": "seller",
+        "party_id": "4d6d651bd7684af3fffabd5f08d12e5a"
+      }
+    ]
   },
-  "evidence_ids": [],
+  "evidence_ids": [
+    "order:97e8d3eb8f48e3610beed991e5f32296",
+    "item:97e8d3eb8f48e3610beed991e5f32296:1",
+    "item:97e8d3eb8f48e3610beed991e5f32296:2",
+    "payment:97e8d3eb8f48e3610beed991e5f32296:1",
+    "payment:97e8d3eb8f48e3610beed991e5f32296:2",
+    "seller:4d6d651bd7684af3fffabd5f08d12e5a",
+    "policy:SELLER_HANDOFF_AFTER_LIMIT"
+  ],
   "financial_resolution": {
     "currency": "BRL",
-    "recommended_refund_brl": 0.0
+    "recommended_refund_brl": 48.14
   },
   "resolution_actions": [
-    "verify_refund_completion"
+    "refund_freight",
+    "review_seller_handoff",
+    "verify_refund_completion",
+    "verify_payment_allocation"
   ]
 }

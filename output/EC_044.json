@@ -1,27 +1,28 @@
 {
   "case_id": "EC_044",
   "case_assessment": {
-    "primary_issue": "ORDER_CANCELED_AFTER_PAYMENT",
+    "primary_issue": "unsupported_late_claim",
     "secondary_issues": [
-      "MULTIPLE_CATEGORIES"
+      "multi_item_order",
+      "multi_seller_order"
     ],
-    "case_status": "action_required",
-    "confidence": 0.95
+    "case_status": "no_action",
+    "confidence": 1.0
   },
   "affected_entities": {
     "order_ids": [
       "a833e4af2b4c893929b9f3adce3ecbeb"
     ],
     "item_ids": [
-      1,
-      2
+      "a833e4af2b4c893929b9f3adce3ecbeb:1",
+      "a833e4af2b4c893929b9f3adce3ecbeb:2"
     ],
     "seller_ids": [
       "2b3b9ce054da76a7428df143a567b156",
       "624f4ece8da4aafb77699233d480f8ef"
     ],
     "payment_ids": [
-      1
+      "a833e4af2b4c893929b9f3adce3ecbeb:1"
     ]
   },
   "customer_context": {
@@ -34,7 +35,6 @@
       "817e1c2d22418c36386406ccacfa53e8"
     ],
     "category_names": [
-      "furniture_decor",
       "furniture_decor"
     ]
   },
@@ -42,17 +42,19 @@
     "delivered_at": "2018-08-29 19:19:40",
     "estimated_delivery_at": "2018-09-14 00:00:00",
     "carrier_handoff_at": "2018-08-21 10:41:00",
-    "delivery_variance_hours": 7.69,
+    "delivery_variance_hours": -364.67,
     "seller_handoff_analysis": [
       {
         "seller_id": "2b3b9ce054da76a7428df143a567b156",
-        "handoff_at": null,
-        "shipping_limit_date": "2018-08-22 11:30:07"
+        "shipping_limit_at": "2018-08-22 11:30:07",
+        "handoff_variance_hours": -24.82,
+        "late_handoff": false
       },
       {
         "seller_id": "624f4ece8da4aafb77699233d480f8ef",
-        "handoff_at": null,
-        "shipping_limit_date": "2018-08-27 11:30:07"
+        "shipping_limit_at": "2018-08-27 11:30:07",
+        "handoff_variance_hours": -144.82,
+        "late_handoff": false
       }
     ],
     "late_handoff_seller_ids": []
@@ -70,13 +72,27 @@
     ]
   },
   "root_cause_analysis": {
-    "ranked_causes": [],
+    "ranked_causes": [
+      {
+        "cause_code": "DELIVERY_WITHIN_ESTIMATE",
+        "rank": 1
+      }
+    ],
     "responsible_parties": []
   },
-  "evidence_ids": [],
+  "evidence_ids": [
+    "order:a833e4af2b4c893929b9f3adce3ecbeb",
+    "item:a833e4af2b4c893929b9f3adce3ecbeb:1",
+    "item:a833e4af2b4c893929b9f3adce3ecbeb:2",
+    "payment:a833e4af2b4c893929b9f3adce3ecbeb:1",
+    "policy:DELIVERY_WITHIN_ESTIMATE"
+  ],
   "financial_resolution": {
     "currency": "BRL",
     "recommended_refund_brl": 0.0
   },
-  "resolution_actions": []
+  "resolution_actions": [
+    "reject_late_refund",
+    "coordinate_multi_seller_case"
+  ]
 }

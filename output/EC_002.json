@@ -3,26 +3,25 @@
   "case_assessment": {
     "primary_issue": "late_delivery_seller",
     "secondary_issues": [
-      "multi_item_order",
-      "repeat_customer",
-      "multiple_categories"
+      "split_payment",
+      "repeat_customer"
     ],
     "case_status": "action_required",
-    "confidence": 0.95
+    "confidence": 1.0
   },
   "affected_entities": {
     "order_ids": [
       "eb09635680fadffb33358e40b05c9029"
     ],
     "item_ids": [
-      1
+      "eb09635680fadffb33358e40b05c9029:1"
     ],
     "seller_ids": [
       "c3867b4666c7d76867627c2f7fb22e21"
     ],
     "payment_ids": [
-      1,
-      2
+      "eb09635680fadffb33358e40b05c9029:1",
+      "eb09635680fadffb33358e40b05c9029:2"
     ]
   },
   "customer_context": {
@@ -43,12 +42,13 @@
     "delivered_at": "2018-03-31 15:23:33",
     "estimated_delivery_at": "2018-03-28 00:00:00",
     "carrier_handoff_at": "2018-03-15 21:33:51",
-    "delivery_variance_hours": 3.35,
+    "delivery_variance_hours": 87.39,
     "seller_handoff_analysis": [
       {
         "seller_id": "c3867b4666c7d76867627c2f7fb22e21",
-        "handoff_at": "2018-03-15 20:31:15",
-        "limit_at": "2018-03-15 20:31:15"
+        "shipping_limit_at": "2018-03-15 20:31:15",
+        "handoff_variance_hours": 1.04,
+        "late_handoff": true
       }
     ],
     "late_handoff_seller_ids": [
@@ -69,15 +69,35 @@
     ]
   },
   "root_cause_analysis": {
-    "ranked_causes": [],
-    "responsible_parties": []
+    "ranked_causes": [
+      {
+        "cause_code": "SELLER_HANDOFF_AFTER_LIMIT",
+        "rank": 1
+      }
+    ],
+    "responsible_parties": [
+      {
+        "party_type": "seller",
+        "party_id": "c3867b4666c7d76867627c2f7fb22e21"
+      }
+    ]
   },
-  "evidence_ids": [],
+  "evidence_ids": [
+    "order:eb09635680fadffb33358e40b05c9029",
+    "item:eb09635680fadffb33358e40b05c9029:1",
+    "payment:eb09635680fadffb33358e40b05c9029:1",
+    "payment:eb09635680fadffb33358e40b05c9029:2",
+    "seller:c3867b4666c7d76867627c2f7fb22e21",
+    "policy:SELLER_HANDOFF_AFTER_LIMIT"
+  ],
   "financial_resolution": {
     "currency": "BRL",
-    "recommended_refund_brl": 0.0
+    "recommended_refund_brl": 18.27
   },
   "resolution_actions": [
-    "review_seller_handoff"
+    "refund_freight",
+    "review_seller_handoff",
+    "verify_refund_completion",
+    "verify_payment_allocation"
   ]
 }
