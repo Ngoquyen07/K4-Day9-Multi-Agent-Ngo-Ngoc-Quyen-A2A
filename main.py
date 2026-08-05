@@ -12,8 +12,7 @@ def ensure_directories():
 
 def generate_sample_inputs_if_empty(loader: OlistDataLoader, count: int = 50):
     """
-    If input/ directory is empty, populates 50 realistic sample cases EC_001.json -> EC_050.json
-    using real order IDs from Olist dataset for testing and verification.
+    If input/ directory is empty or only contains non-EC files, populates 50 sample cases.
     """
     existing_inputs = [f for f in os.listdir("input") if f.startswith("EC_") and f.endswith(".json")]
     if len(existing_inputs) >= count:
@@ -55,7 +54,7 @@ def run_pipeline():
     tracer = ExecutionTracer(trace_file="trace.jsonl")
     tracer.clear()
 
-    coordinator = CoordinatorAgent(loader, tracer)
+    coordinator = CoordinatorAgent(loader, tracer, verbose=False, use_llm=False)
 
     input_files = sorted([f for f in os.listdir("input") if f.startswith("EC_") and f.endswith(".json")])
     print(f"Processing {len(input_files)} cases...")
@@ -78,14 +77,15 @@ def run_pipeline():
 
     print(f"Successfully processed {len(output_files_created)} cases into output/")
 
-    # Zip output folder
+    # Zip output folder containing 'output/EC_xxx.json' entries
     zip_filename = "output.zip"
-    print(f"Creating {zip_filename}...")
+    print(f"Creating {zip_filename} with output/ directory structure...")
     with zipfile.ZipFile(zip_filename, "w", zipfile.ZIP_DEFLATED) as zipf:
         for out_file in output_files_created:
-            zipf.write(out_file, os.path.basename(out_file))
+            # Add relative path 'output/EC_xxx.json' inside zip
+            zipf.write(out_file, arcname=os.path.join("output", os.path.basename(out_file)))
 
-    print(f"File {zip_filename} created containing {len(output_files_created)} JSON files.")
+    print(f"File {zip_filename} created containing {len(output_files_created)} JSON files under output/ directory.")
 
 if __name__ == "__main__":
     run_pipeline()
