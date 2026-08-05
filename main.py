@@ -219,7 +219,13 @@ def main() -> None:
     with zipfile.ZipFile(ROOT / "output.zip", "w", zipfile.ZIP_DEFLATED) as zf:
         for f in sorted(OUTPUT.glob("EC_*.json")):
             zf.write(f, arcname=f"output/{f.name}")
-    print("Wrote and validated 50 EC_POLICY_V2 outputs.")
+    with zipfile.ZipFile(ROOT / "submission.zip", "w", zipfile.ZIP_DEFLATED) as zf:
+        for fname in ("architecture.md", "trace.jsonl", "metadata.json"):
+            if (ROOT / fname).exists():
+                zf.write(ROOT / fname, arcname=fname)
+        for f in sorted(OUTPUT.glob("EC_*.json")):
+            zf.write(f, arcname=f"output/{f.name}")
+    print("Wrote and validated 50 EC_POLICY_V2 outputs and created submission.zip.")
 
 
 if __name__ == "__main__":

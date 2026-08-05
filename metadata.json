@@ -1,6 +1,10 @@
 {
+  "cohort": "K4",
+  "repo_starter": "https://github.com/VinUni-AI20k/K4-Day9-Multi-Agent-A2A",
+  "policy_version": "EC_POLICY_V2",
   "model": "meta-llama/llama-3.1-8b-instruct",
   "parameter_size": "8B",
   "framework": "Python, pandas, OpenRouter OpenAI client, LLM multi-agent handoffs",
+  "tools": "pandas, json, Python built-in modules",
   "runtime": "Python 3.13"
 }
