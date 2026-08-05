@@ -1,58 +1,67 @@
 {
   "case_id": "EC_019",
   "case_assessment": {
-    "primary_issue": "unsupported_late_claim",
-    "secondary_issues": [],
-    "case_status": "no_action",
+    "primary_issue": "late_delivery_seller",
+    "secondary_issues": [
+      "multi_item_order",
+      "repeat_customer"
+    ],
+    "case_status": "action_required",
     "confidence": 0.95
   },
   "affected_entities": {
     "order_ids": [
-      "85ce859fd6dc634de8d2f1e290444043"
+      "a4e90af1c84c4455c7c4c65293ae2c78"
     ],
     "item_ids": [
-      "85ce859fd6dc634de8d2f1e290444043:1"
+      "a4e90af1c84c4455c7c4c65293ae2c78:1",
+      "a4e90af1c84c4455c7c4c65293ae2c78:2"
     ],
     "seller_ids": [
-      "d2374cbcbb3ca4ab1086534108cc3ab7"
+      "4a3ca9315b744ce9f8e9374361493884"
     ],
     "payment_ids": [
-      "85ce859fd6dc634de8d2f1e290444043:1"
+      "a4e90af1c84c4455c7c4c65293ae2c78:1"
     ]
   },
   "customer_context": {
-    "customer_unique_id": "d0ff1a7468fcc46b8fc658ab35d2a12c",
-    "related_order_ids": []
+    "customer_unique_id": "e3301490c373db9263c15a73172d0c6f",
+    "related_order_ids": [
+      "3ce16e50c1842ad30631811796a31afc",
+      "c7c28a159a907d1d0ff580856daffa72"
+    ]
   },
   "product_context": {
     "product_ids": [
-      "cce679660c66e6fbd5c8091dfd29e9cd"
+      "f4d18451e6c35980e6898e36dfd6fb55"
     ],
     "category_names": [
       "bed_bath_table"
     ]
   },
   "delivery_analysis": {
-    "delivered_at": "2017-11-27 18:28:00",
-    "estimated_delivery_at": "2017-12-11 00:00:00",
-    "carrier_handoff_at": "2017-11-23 21:32:26",
-    "delivery_variance_hours": -317.53,
+    "delivered_at": "2017-05-22 15:25:48",
+    "estimated_delivery_at": "2017-05-10 00:00:00",
+    "carrier_handoff_at": "2017-05-02 13:54:14",
+    "delivery_variance_hours": 303.43,
     "seller_handoff_analysis": [
       {
-        "seller_id": "d2374cbcbb3ca4ab1086534108cc3ab7",
-        "shipping_limit_at": "2017-11-29 00:14:22",
-        "handoff_variance_hours": -122.7,
-        "late_handoff": false
+        "seller_id": "4a3ca9315b744ce9f8e9374361493884",
+        "shipping_limit_at": "2017-04-27 12:36:44",
+        "handoff_variance_hours": 121.29,
+        "late_handoff": true
       }
     ],
-    "late_handoff_seller_ids": []
+    "late_handoff_seller_ids": [
+      "4a3ca9315b744ce9f8e9374361493884"
+    ]
   },
   "payment_reconciliation": {
     "currency": "BRL",
-    "item_total_brl": 17.9,
-    "freight_total_brl": 11.85,
-    "expected_total_brl": 29.75,
-    "payment_total_brl": 29.75,
+    "item_total_brl": 97.8,
+    "freight_total_brl": 23.48,
+    "expected_total_brl": 121.28,
+    "payment_total_brl": 121.28,
     "difference_brl": 0.0,
     "reconciled": true,
     "payment_types": [
@@ -62,24 +71,33 @@
   "root_cause_analysis": {
     "ranked_causes": [
       {
-        "cause_code": "DELIVERY_WITHIN_ESTIMATE",
+        "cause_code": "SELLER_HANDOFF_AFTER_LIMIT",
         "rank": 1
       }
     ],
-    "responsible_parties": []
+    "responsible_parties": [
+      {
+        "party_type": "seller",
+        "party_id": "4a3ca9315b744ce9f8e9374361493884"
+      }
+    ]
   },
   "evidence_ids": [
-    "order:85ce859fd6dc634de8d2f1e290444043",
-    "item:85ce859fd6dc634de8d2f1e290444043:1",
-    "payment:85ce859fd6dc634de8d2f1e290444043:1",
-    "policy:DELIVERY_WITHIN_ESTIMATE"
+    "order:a4e90af1c84c4455c7c4c65293ae2c78",
+    "item:a4e90af1c84c4455c7c4c65293ae2c78:1",
+    "item:a4e90af1c84c4455c7c4c65293ae2c78:2",
+    "payment:a4e90af1c84c4455c7c4c65293ae2c78:1",
+    "seller:4a3ca9315b744ce9f8e9374361493884",
+    "policy:SELLER_HANDOFF_AFTER_LIMIT"
   ],
   "financial_resolution": {
     "currency": "BRL",
-    "recommended_refund_brl": 0.0
+    "recommended_refund_brl": 23.48
   },
   "resolution_actions": [
-    "reject_late_refund",
+    "refund_freight",
+    "review_seller_handoff",
+    "verify_refund_completion",
     "verify_payment_allocation"
   ]
 }

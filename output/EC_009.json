@@ -1,85 +1,94 @@
 {
   "case_id": "EC_009",
   "case_assessment": {
-    "primary_issue": "unsupported_late_claim",
-    "secondary_issues": [],
-    "case_status": "no_action",
+    "primary_issue": "canceled_order_paid",
+    "secondary_issues": [
+      "multi_item_order"
+    ],
+    "case_status": "action_required",
     "confidence": 0.95
   },
   "affected_entities": {
     "order_ids": [
-      "76c6e866289321a7c93b82b54852dc33"
+      "6683aa4f73f7869ec65ebeeef53f700b"
     ],
     "item_ids": [
-      "76c6e866289321a7c93b82b54852dc33:1"
+      "6683aa4f73f7869ec65ebeeef53f700b:1",
+      "6683aa4f73f7869ec65ebeeef53f700b:2",
+      "6683aa4f73f7869ec65ebeeef53f700b:3",
+      "6683aa4f73f7869ec65ebeeef53f700b:4",
+      "6683aa4f73f7869ec65ebeeef53f700b:5"
     ],
     "seller_ids": [
-      "63b9ae557efed31d1f7687917d248a8d"
+      "4e8dacf3d38f281ae26c3e0321d92d88"
     ],
     "payment_ids": [
-      "76c6e866289321a7c93b82b54852dc33:1"
+      "6683aa4f73f7869ec65ebeeef53f700b:1"
     ]
   },
   "customer_context": {
-    "customer_unique_id": "39382392765b6dc74812866ee5ee92a7",
+    "customer_unique_id": "7e2ae24e734d02f10866ccab9c7ad0c8",
     "related_order_ids": []
   },
   "product_context": {
     "product_ids": [
-      "ac1789e492dcd698c5c10b97a671243a"
+      "c3a52053718435a35e070b991ff546ec"
     ],
     "category_names": [
-      "furniture_decor"
+      "housewares"
     ]
   },
   "delivery_analysis": {
-    "delivered_at": "2017-02-02 14:08:10",
-    "estimated_delivery_at": "2017-03-06 00:00:00",
-    "carrier_handoff_at": "2017-01-26 14:16:31",
-    "delivery_variance_hours": -753.86,
-    "seller_handoff_analysis": [
-      {
-        "seller_id": "63b9ae557efed31d1f7687917d248a8d",
-        "shipping_limit_at": "2017-01-27 18:29:09",
-        "handoff_variance_hours": -28.21,
-        "late_handoff": false
-      }
-    ],
+    "delivered_at": null,
+    "estimated_delivery_at": "2017-05-29 00:00:00",
+    "carrier_handoff_at": null,
+    "delivery_variance_hours": null,
+    "seller_handoff_analysis": [],
     "late_handoff_seller_ids": []
   },
   "payment_reconciliation": {
     "currency": "BRL",
-    "item_total_brl": 19.9,
-    "freight_total_brl": 16.05,
-    "expected_total_brl": 35.95,
-    "payment_total_brl": 35.95,
+    "item_total_brl": 89.5,
+    "freight_total_brl": 54.8,
+    "expected_total_brl": 144.3,
+    "payment_total_brl": 144.3,
     "difference_brl": 0.0,
     "reconciled": true,
     "payment_types": [
-      "boleto"
+      "credit_card"
     ]
   },
   "root_cause_analysis": {
     "ranked_causes": [
       {
-        "cause_code": "DELIVERY_WITHIN_ESTIMATE",
+        "cause_code": "ORDER_CANCELED_AFTER_PAYMENT",
         "rank": 1
       }
     ],
-    "responsible_parties": []
+    "responsible_parties": [
+      {
+        "party_type": "platform",
+        "party_id": "OLIST_PLATFORM"
+      }
+    ]
   },
   "evidence_ids": [
-    "order:76c6e866289321a7c93b82b54852dc33",
-    "item:76c6e866289321a7c93b82b54852dc33:1",
-    "payment:76c6e866289321a7c93b82b54852dc33:1",
-    "policy:DELIVERY_WITHIN_ESTIMATE"
+    "order:6683aa4f73f7869ec65ebeeef53f700b",
+    "item:6683aa4f73f7869ec65ebeeef53f700b:1",
+    "item:6683aa4f73f7869ec65ebeeef53f700b:2",
+    "item:6683aa4f73f7869ec65ebeeef53f700b:3",
+    "item:6683aa4f73f7869ec65ebeeef53f700b:4",
+    "item:6683aa4f73f7869ec65ebeeef53f700b:5",
+    "payment:6683aa4f73f7869ec65ebeeef53f700b:1",
+    "policy:ORDER_CANCELED_AFTER_PAYMENT"
   ],
   "financial_resolution": {
     "currency": "BRL",
-    "recommended_refund_brl": 0.0
+    "recommended_refund_brl": 144.3
   },
   "resolution_actions": [
-    "reject_late_refund",
+    "issue_full_refund",
+    "verify_refund_completion",
     "verify_payment_allocation"
   ]
 }

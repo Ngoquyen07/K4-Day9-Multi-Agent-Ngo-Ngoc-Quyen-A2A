@@ -1,58 +1,54 @@
 {
   "case_id": "EC_004",
   "case_assessment": {
-    "primary_issue": "unsupported_late_claim",
-    "secondary_issues": [],
-    "case_status": "no_action",
+    "primary_issue": "canceled_order_paid",
+    "secondary_issues": [
+      "multi_item_order"
+    ],
+    "case_status": "action_required",
     "confidence": 0.95
   },
   "affected_entities": {
     "order_ids": [
-      "949d5b44dbf5de918fe9c16f97b45f8a"
+      "5d9c5817e278892b7498d90bfa28ade8"
     ],
     "item_ids": [
-      "949d5b44dbf5de918fe9c16f97b45f8a:1"
+      "5d9c5817e278892b7498d90bfa28ade8:1",
+      "5d9c5817e278892b7498d90bfa28ade8:2"
     ],
     "seller_ids": [
-      "66922902710d126a0e7d26b0e3805106"
+      "340636a908b13bbe0f4fb63fbe1d0c03"
     ],
     "payment_ids": [
-      "949d5b44dbf5de918fe9c16f97b45f8a:1"
+      "5d9c5817e278892b7498d90bfa28ade8:1"
     ]
   },
   "customer_context": {
-    "customer_unique_id": "7c142cf63193a1473d2e66489a9ae977",
+    "customer_unique_id": "67a7e94ec59ef6d6ba83942c81d39b9a",
     "related_order_ids": []
   },
   "product_context": {
     "product_ids": [
-      "d0b61bfb1de832b15ba9d266ca96e5b0"
+      "f6dc856631040b5a7843b14a94b09b96"
     ],
     "category_names": [
       "pet_shop"
     ]
   },
   "delivery_analysis": {
-    "delivered_at": "2017-12-02 00:28:42",
-    "estimated_delivery_at": "2017-12-15 00:00:00",
-    "carrier_handoff_at": "2017-11-22 13:39:59",
-    "delivery_variance_hours": -311.52,
-    "seller_handoff_analysis": [
-      {
-        "seller_id": "66922902710d126a0e7d26b0e3805106",
-        "shipping_limit_at": "2017-11-23 19:45:59",
-        "handoff_variance_hours": -30.1,
-        "late_handoff": false
-      }
-    ],
+    "delivered_at": null,
+    "estimated_delivery_at": "2018-05-10 00:00:00",
+    "carrier_handoff_at": null,
+    "delivery_variance_hours": null,
+    "seller_handoff_analysis": [],
     "late_handoff_seller_ids": []
   },
   "payment_reconciliation": {
     "currency": "BRL",
-    "item_total_brl": 45.0,
-    "freight_total_brl": 27.2,
-    "expected_total_brl": 72.2,
-    "payment_total_brl": 72.2,
+    "item_total_brl": 221.8,
+    "freight_total_brl": 68.36,
+    "expected_total_brl": 290.16,
+    "payment_total_brl": 290.16,
     "difference_brl": 0.0,
     "reconciled": true,
     "payment_types": [
@@ -62,24 +58,31 @@
   "root_cause_analysis": {
     "ranked_causes": [
       {
-        "cause_code": "DELIVERY_WITHIN_ESTIMATE",
+        "cause_code": "ORDER_CANCELED_AFTER_PAYMENT",
         "rank": 1
       }
     ],
-    "responsible_parties": []
+    "responsible_parties": [
+      {
+        "party_type": "platform",
+        "party_id": "OLIST_PLATFORM"
+      }
+    ]
   },
   "evidence_ids": [
-    "order:949d5b44dbf5de918fe9c16f97b45f8a",
-    "item:949d5b44dbf5de918fe9c16f97b45f8a:1",
-    "payment:949d5b44dbf5de918fe9c16f97b45f8a:1",
-    "policy:DELIVERY_WITHIN_ESTIMATE"
+    "order:5d9c5817e278892b7498d90bfa28ade8",
+    "item:5d9c5817e278892b7498d90bfa28ade8:1",
+    "item:5d9c5817e278892b7498d90bfa28ade8:2",
+    "payment:5d9c5817e278892b7498d90bfa28ade8:1",
+    "policy:ORDER_CANCELED_AFTER_PAYMENT"
   ],
   "financial_resolution": {
     "currency": "BRL",
-    "recommended_refund_brl": 0.0
+    "recommended_refund_brl": 290.16
   },
   "resolution_actions": [
-    "reject_late_refund",
+    "issue_full_refund",
+    "verify_refund_completion",
     "verify_payment_allocation"
   ]
 }

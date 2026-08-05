@@ -1,58 +1,68 @@
 {
   "case_id": "EC_006",
   "case_assessment": {
-    "primary_issue": "unsupported_late_claim",
-    "secondary_issues": [],
-    "case_status": "no_action",
+    "primary_issue": "late_delivery_seller",
+    "secondary_issues": [
+      "multi_item_order",
+      "repeat_customer"
+    ],
+    "case_status": "action_required",
     "confidence": 0.95
   },
   "affected_entities": {
     "order_ids": [
-      "a4591c265e18cb1dcee52889e2d8acc3"
+      "0e4a4de1d15b6df8d4335fb2db61667a"
     ],
     "item_ids": [
-      "a4591c265e18cb1dcee52889e2d8acc3:1"
+      "0e4a4de1d15b6df8d4335fb2db61667a:1",
+      "0e4a4de1d15b6df8d4335fb2db61667a:2",
+      "0e4a4de1d15b6df8d4335fb2db61667a:3",
+      "0e4a4de1d15b6df8d4335fb2db61667a:4"
     ],
     "seller_ids": [
-      "8581055ce74af1daba164fdbd55a40de"
+      "897060da8b9a21f655304d50fd935913"
     ],
     "payment_ids": [
-      "a4591c265e18cb1dcee52889e2d8acc3:1"
+      "0e4a4de1d15b6df8d4335fb2db61667a:1"
     ]
   },
   "customer_context": {
-    "customer_unique_id": "80bb27c7c16e8f973207a5086ab329e2",
-    "related_order_ids": []
+    "customer_unique_id": "85189d642c11e7090cb2f72fed68ea42",
+    "related_order_ids": [
+      "af7de7cc75eb2f7d0eff2e383eccf083"
+    ]
   },
   "product_context": {
     "product_ids": [
-      "060cb19345d90064d1015407193c233d"
+      "ad4b5def91ac7c575dbdf65b5be311f4"
     ],
     "category_names": [
-      "auto"
+      "computers_accessories"
     ]
   },
   "delivery_analysis": {
-    "delivered_at": "2017-07-26 10:57:55",
-    "estimated_delivery_at": "2017-08-01 00:00:00",
-    "carrier_handoff_at": "2017-07-11 14:58:04",
-    "delivery_variance_hours": -133.03,
+    "delivered_at": "2018-03-21 21:28:39",
+    "estimated_delivery_at": "2018-03-16 00:00:00",
+    "carrier_handoff_at": "2018-03-08 19:58:30",
+    "delivery_variance_hours": 141.48,
     "seller_handoff_analysis": [
       {
-        "seller_id": "8581055ce74af1daba164fdbd55a40de",
-        "shipping_limit_at": "2017-07-13 22:10:13",
-        "handoff_variance_hours": -55.2,
-        "late_handoff": false
+        "seller_id": "897060da8b9a21f655304d50fd935913",
+        "shipping_limit_at": "2018-02-28 15:50:31",
+        "handoff_variance_hours": 196.13,
+        "late_handoff": true
       }
     ],
-    "late_handoff_seller_ids": []
+    "late_handoff_seller_ids": [
+      "897060da8b9a21f655304d50fd935913"
+    ]
   },
   "payment_reconciliation": {
     "currency": "BRL",
-    "item_total_brl": 147.9,
-    "freight_total_brl": 27.36,
-    "expected_total_brl": 175.26,
-    "payment_total_brl": 175.26,
+    "item_total_brl": 93.92,
+    "freight_total_brl": 60.4,
+    "expected_total_brl": 154.32,
+    "payment_total_brl": 154.32,
     "difference_brl": 0.0,
     "reconciled": true,
     "payment_types": [
@@ -62,24 +72,35 @@
   "root_cause_analysis": {
     "ranked_causes": [
       {
-        "cause_code": "DELIVERY_WITHIN_ESTIMATE",
+        "cause_code": "SELLER_HANDOFF_AFTER_LIMIT",
         "rank": 1
       }
     ],
-    "responsible_parties": []
+    "responsible_parties": [
+      {
+        "party_type": "seller",
+        "party_id": "897060da8b9a21f655304d50fd935913"
+      }
+    ]
   },
   "evidence_ids": [
-    "order:a4591c265e18cb1dcee52889e2d8acc3",
-    "item:a4591c265e18cb1dcee52889e2d8acc3:1",
-    "payment:a4591c265e18cb1dcee52889e2d8acc3:1",
-    "policy:DELIVERY_WITHIN_ESTIMATE"
+    "order:0e4a4de1d15b6df8d4335fb2db61667a",
+    "item:0e4a4de1d15b6df8d4335fb2db61667a:1",
+    "item:0e4a4de1d15b6df8d4335fb2db61667a:2",
+    "item:0e4a4de1d15b6df8d4335fb2db61667a:3",
+    "item:0e4a4de1d15b6df8d4335fb2db61667a:4",
+    "payment:0e4a4de1d15b6df8d4335fb2db61667a:1",
+    "seller:897060da8b9a21f655304d50fd935913",
+    "policy:SELLER_HANDOFF_AFTER_LIMIT"
   ],
   "financial_resolution": {
     "currency": "BRL",
-    "recommended_refund_brl": 0.0
+    "recommended_refund_brl": 60.4
   },
   "resolution_actions": [
-    "reject_late_refund",
+    "refund_freight",
+    "review_seller_handoff",
+    "verify_refund_completion",
     "verify_payment_allocation"
   ]
 }

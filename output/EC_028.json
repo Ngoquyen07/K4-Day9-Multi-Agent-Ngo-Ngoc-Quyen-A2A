@@ -1,58 +1,54 @@
 {
   "case_id": "EC_028",
   "case_assessment": {
-    "primary_issue": "unsupported_late_claim",
-    "secondary_issues": [],
-    "case_status": "no_action",
+    "primary_issue": "canceled_order_paid",
+    "secondary_issues": [
+      "multi_item_order"
+    ],
+    "case_status": "action_required",
     "confidence": 0.95
   },
   "affected_entities": {
     "order_ids": [
-      "dd78f560c270f1909639c11b925620ea"
+      "1118f05e23d1a8082fa47f8a377de658"
     ],
     "item_ids": [
-      "dd78f560c270f1909639c11b925620ea:1"
+      "1118f05e23d1a8082fa47f8a377de658:1",
+      "1118f05e23d1a8082fa47f8a377de658:2"
     ],
     "seller_ids": [
-      "d3f39f05462b79a4562d35893a28f159"
+      "81783131d2a97c8d44d406a4be81b5d9"
     ],
     "payment_ids": [
-      "dd78f560c270f1909639c11b925620ea:1"
+      "1118f05e23d1a8082fa47f8a377de658:1"
     ]
   },
   "customer_context": {
-    "customer_unique_id": "f4a7ef6bd931f83d75d83b71c94e90df",
+    "customer_unique_id": "2348acb8486ed639e2a7e9e2aa198d45",
     "related_order_ids": []
   },
   "product_context": {
     "product_ids": [
-      "00baba5b58e274d0332a0c8a0a66f877"
+      "49f19939bc5c8639e06c36d3bf01ee98"
     ],
     "category_names": [
-      "perfumery"
+      "toys"
     ]
   },
   "delivery_analysis": {
-    "delivered_at": "2018-03-21 14:41:50",
-    "estimated_delivery_at": "2018-03-28 00:00:00",
-    "carrier_handoff_at": "2018-03-12 21:06:37",
-    "delivery_variance_hours": -153.3,
-    "seller_handoff_analysis": [
-      {
-        "seller_id": "d3f39f05462b79a4562d35893a28f159",
-        "shipping_limit_at": "2018-03-16 02:30:56",
-        "handoff_variance_hours": -77.41,
-        "late_handoff": false
-      }
-    ],
+    "delivered_at": null,
+    "estimated_delivery_at": "2018-08-13 00:00:00",
+    "carrier_handoff_at": null,
+    "delivery_variance_hours": null,
+    "seller_handoff_analysis": [],
     "late_handoff_seller_ids": []
   },
   "payment_reconciliation": {
     "currency": "BRL",
-    "item_total_brl": 47.9,
-    "freight_total_brl": 12.79,
-    "expected_total_brl": 60.69,
-    "payment_total_brl": 60.69,
+    "item_total_brl": 226.2,
+    "freight_total_brl": 16.42,
+    "expected_total_brl": 242.62,
+    "payment_total_brl": 242.62,
     "difference_brl": 0.0,
     "reconciled": true,
     "payment_types": [
@@ -62,24 +58,31 @@
   "root_cause_analysis": {
     "ranked_causes": [
       {
-        "cause_code": "DELIVERY_WITHIN_ESTIMATE",
+        "cause_code": "ORDER_CANCELED_AFTER_PAYMENT",
         "rank": 1
       }
     ],
-    "responsible_parties": []
+    "responsible_parties": [
+      {
+        "party_type": "platform",
+        "party_id": "OLIST_PLATFORM"
+      }
+    ]
   },
   "evidence_ids": [
-    "order:dd78f560c270f1909639c11b925620ea",
-    "item:dd78f560c270f1909639c11b925620ea:1",
-    "payment:dd78f560c270f1909639c11b925620ea:1",
-    "policy:DELIVERY_WITHIN_ESTIMATE"
+    "order:1118f05e23d1a8082fa47f8a377de658",
+    "item:1118f05e23d1a8082fa47f8a377de658:1",
+    "item:1118f05e23d1a8082fa47f8a377de658:2",
+    "payment:1118f05e23d1a8082fa47f8a377de658:1",
+    "policy:ORDER_CANCELED_AFTER_PAYMENT"
   ],
   "financial_resolution": {
     "currency": "BRL",
-    "recommended_refund_brl": 0.0
+    "recommended_refund_brl": 242.62
   },
   "resolution_actions": [
-    "reject_late_refund",
+    "issue_full_refund",
+    "verify_refund_completion",
     "verify_payment_allocation"
   ]
 }

@@ -1,89 +1,92 @@
 {
   "case_id": "EC_011",
   "case_assessment": {
-    "primary_issue": "unsupported_late_claim",
+    "primary_issue": "canceled_order_paid",
     "secondary_issues": [
       "multi_item_order"
     ],
-    "case_status": "no_action",
+    "case_status": "action_required",
     "confidence": 0.95
   },
   "affected_entities": {
     "order_ids": [
-      "e6ce16cb79ec1d90b1da9085a6118aeb"
+      "113e41a438f06ffae6d1857e01d60c45"
     ],
     "item_ids": [
-      "e6ce16cb79ec1d90b1da9085a6118aeb:1",
-      "e6ce16cb79ec1d90b1da9085a6118aeb:2"
+      "113e41a438f06ffae6d1857e01d60c45:1",
+      "113e41a438f06ffae6d1857e01d60c45:2",
+      "113e41a438f06ffae6d1857e01d60c45:3",
+      "113e41a438f06ffae6d1857e01d60c45:4"
     ],
     "seller_ids": [
-      "001cca7ae9ae17fb1caed9dfb1094831"
+      "bcf5566870987da7bc811fbc8c5b9fd9"
     ],
     "payment_ids": [
-      "e6ce16cb79ec1d90b1da9085a6118aeb:1"
+      "113e41a438f06ffae6d1857e01d60c45:1"
     ]
   },
   "customer_context": {
-    "customer_unique_id": "f2a85dec752b8517b5e58a06ff3cd937",
+    "customer_unique_id": "1871aa277cbcefacecbf979fb6888b7f",
     "related_order_ids": []
   },
   "product_context": {
     "product_ids": [
-      "08574b074924071f4e201e151b152b4e"
+      "59c6d60f81179f563785a48de25532b9"
     ],
     "category_names": [
-      "garden_tools"
+      "musical_instruments"
     ]
   },
   "delivery_analysis": {
-    "delivered_at": "2017-05-29 11:18:31",
-    "estimated_delivery_at": "2017-06-07 00:00:00",
-    "carrier_handoff_at": "2017-05-18 11:40:40",
-    "delivery_variance_hours": -204.69,
-    "seller_handoff_analysis": [
-      {
-        "seller_id": "001cca7ae9ae17fb1caed9dfb1094831",
-        "shipping_limit_at": "2017-05-22 19:50:18",
-        "handoff_variance_hours": -104.16,
-        "late_handoff": false
-      }
-    ],
+    "delivered_at": null,
+    "estimated_delivery_at": "2017-08-24 00:00:00",
+    "carrier_handoff_at": null,
+    "delivery_variance_hours": null,
+    "seller_handoff_analysis": [],
     "late_handoff_seller_ids": []
   },
   "payment_reconciliation": {
     "currency": "BRL",
-    "item_total_brl": 198.0,
-    "freight_total_brl": 61.06,
-    "expected_total_brl": 259.06,
-    "payment_total_brl": 259.06,
+    "item_total_brl": 96.0,
+    "freight_total_brl": 31.12,
+    "expected_total_brl": 127.12,
+    "payment_total_brl": 127.12,
     "difference_brl": 0.0,
     "reconciled": true,
     "payment_types": [
-      "credit_card"
+      "boleto"
     ]
   },
   "root_cause_analysis": {
     "ranked_causes": [
       {
-        "cause_code": "DELIVERY_WITHIN_ESTIMATE",
+        "cause_code": "ORDER_CANCELED_AFTER_PAYMENT",
         "rank": 1
       }
     ],
-    "responsible_parties": []
+    "responsible_parties": [
+      {
+        "party_type": "platform",
+        "party_id": "OLIST_PLATFORM"
+      }
+    ]
   },
   "evidence_ids": [
-    "order:e6ce16cb79ec1d90b1da9085a6118aeb",
-    "item:e6ce16cb79ec1d90b1da9085a6118aeb:1",
-    "item:e6ce16cb79ec1d90b1da9085a6118aeb:2",
-    "payment:e6ce16cb79ec1d90b1da9085a6118aeb:1",
-    "policy:DELIVERY_WITHIN_ESTIMATE"
+    "order:113e41a438f06ffae6d1857e01d60c45",
+    "item:113e41a438f06ffae6d1857e01d60c45:1",
+    "item:113e41a438f06ffae6d1857e01d60c45:2",
+    "item:113e41a438f06ffae6d1857e01d60c45:3",
+    "item:113e41a438f06ffae6d1857e01d60c45:4",
+    "payment:113e41a438f06ffae6d1857e01d60c45:1",
+    "policy:ORDER_CANCELED_AFTER_PAYMENT"
   ],
   "financial_resolution": {
     "currency": "BRL",
-    "recommended_refund_brl": 0.0
+    "recommended_refund_brl": 127.12
   },
   "resolution_actions": [
-    "reject_late_refund",
+    "issue_full_refund",
+    "verify_refund_completion",
     "verify_payment_allocation"
   ]
 }

@@ -1,62 +1,49 @@
 {
   "case_id": "EC_031",
   "case_assessment": {
-    "primary_issue": "unsupported_late_claim",
-    "secondary_issues": [],
-    "case_status": "no_action",
+    "primary_issue": "unavailable_order_paid",
+    "secondary_issues": [
+      "repeat_customer"
+    ],
+    "case_status": "action_required",
     "confidence": 0.95
   },
   "affected_entities": {
     "order_ids": [
-      "f70a0aff17df5a6cdd9a7196128bd354"
+      "72fa449394ed9dc9093819f93ca563af"
     ],
-    "item_ids": [
-      "f70a0aff17df5a6cdd9a7196128bd354:1"
-    ],
-    "seller_ids": [
-      "5dceca129747e92ff8ef7a997dc4f8ca"
-    ],
+    "item_ids": [],
+    "seller_ids": [],
     "payment_ids": [
-      "f70a0aff17df5a6cdd9a7196128bd354:1"
+      "72fa449394ed9dc9093819f93ca563af:1"
     ]
   },
   "customer_context": {
-    "customer_unique_id": "1974875b4a1d2e2ee6d586e3ba4d7602",
-    "related_order_ids": []
+    "customer_unique_id": "af51e8dd1c30737ba2dd0ece8cfa294d",
+    "related_order_ids": [
+      "b6b73b9c0cab8ac7a2b02a49623d4cfe"
+    ]
   },
   "product_context": {
-    "product_ids": [
-      "cafd558df4c3c9d1c338ba6930ea9a62"
-    ],
-    "category_names": [
-      "baby"
-    ]
+    "product_ids": [],
+    "category_names": []
   },
   "delivery_analysis": {
-    "delivered_at": "2017-08-18 14:28:02",
-    "estimated_delivery_at": "2017-08-23 00:00:00",
-    "carrier_handoff_at": "2017-08-17 15:35:07",
-    "delivery_variance_hours": -105.53,
-    "seller_handoff_analysis": [
-      {
-        "seller_id": "5dceca129747e92ff8ef7a997dc4f8ca",
-        "shipping_limit_at": "2017-08-17 02:45:24",
-        "handoff_variance_hours": 12.83,
-        "late_handoff": true
-      }
-    ],
-    "late_handoff_seller_ids": [
-      "5dceca129747e92ff8ef7a997dc4f8ca"
-    ]
+    "delivered_at": null,
+    "estimated_delivery_at": "2017-06-16 00:00:00",
+    "carrier_handoff_at": null,
+    "delivery_variance_hours": null,
+    "seller_handoff_analysis": [],
+    "late_handoff_seller_ids": []
   },
   "payment_reconciliation": {
     "currency": "BRL",
-    "item_total_brl": 279.0,
-    "freight_total_brl": 34.19,
-    "expected_total_brl": 313.19,
-    "payment_total_brl": 313.19,
-    "difference_brl": 0.0,
-    "reconciled": true,
+    "item_total_brl": null,
+    "freight_total_brl": null,
+    "expected_total_brl": null,
+    "payment_total_brl": 138.92,
+    "difference_brl": null,
+    "reconciled": null,
     "payment_types": [
       "boleto"
     ]
@@ -64,24 +51,29 @@
   "root_cause_analysis": {
     "ranked_causes": [
       {
-        "cause_code": "DELIVERY_WITHIN_ESTIMATE",
+        "cause_code": "ORDER_UNAVAILABLE_AFTER_PAYMENT",
         "rank": 1
       }
     ],
-    "responsible_parties": []
+    "responsible_parties": [
+      {
+        "party_type": "platform",
+        "party_id": "OLIST_PLATFORM"
+      }
+    ]
   },
   "evidence_ids": [
-    "order:f70a0aff17df5a6cdd9a7196128bd354",
-    "item:f70a0aff17df5a6cdd9a7196128bd354:1",
-    "payment:f70a0aff17df5a6cdd9a7196128bd354:1",
-    "policy:DELIVERY_WITHIN_ESTIMATE"
+    "order:72fa449394ed9dc9093819f93ca563af",
+    "payment:72fa449394ed9dc9093819f93ca563af:1",
+    "policy:ORDER_UNAVAILABLE_AFTER_PAYMENT"
   ],
   "financial_resolution": {
     "currency": "BRL",
-    "recommended_refund_brl": 0.0
+    "recommended_refund_brl": 138.92
   },
   "resolution_actions": [
-    "reject_late_refund",
+    "issue_full_refund",
+    "verify_refund_completion",
     "verify_payment_allocation"
   ]
 }

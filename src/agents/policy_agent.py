@@ -6,11 +6,11 @@ class PolicyAgent:
     """
     Policy Agent:
     Evaluates EC_POLICY_V2 business rules using LLM reasoning (nvidia/nemotron-nano-9b-v2:free via OpenRouter).
-    Falls back to deterministic rule engine if LLM API is unavailable.
+    Falls back to deterministic rule engine if LLM API is disabled or unavailable.
     """
 
     def __init__(self, llm_client: Optional[LLMClient] = None):
-        self.llm_client = llm_client or LLMClient(model_name="nvidia/nemotron-nano-9b-v2:free")
+        self.llm_client = llm_client
 
     def apply_policy(
         self,
@@ -128,20 +128,24 @@ class PolicyAgent:
 
         evidence_ids = evidence_ids[:20]
 
-        # Invoke LLM for Policy Agent reasoning & validation
-        sys_prompt = (
-            "You are the Policy Agent in a multi-agent e-commerce dispute system. "
-            "Analyze the case evidence according to EC_POLICY_V2 rules and confirm the primary issue and resolution."
-        )
-        user_prompt = (
-            f"Order ID: {order_id}\nOrder Status: {order_status}\n"
-            f"Late Delivery: {is_late_delivery}, Late Sellers: {late_seller_ids}\n"
-            f"Payment Total: {payment_total_brl} BRL, Expected: {order_product_info.get('expected_total_brl')} BRL, Reconciled: {reconciled}\n"
-            f"Evaluated Primary Issue: {primary_issue}, Refund: {recommended_refund_brl} BRL\n"
-            "Provide your policy reasoning."
-        )
+        llm_policy_reasoning = ""
+        llm_policy_content = ""
+        if self.llm_client and self.llm_client.client:
+            sys_prompt = (
+                "You are the Policy Agent in a multi-agent e-commerce dispute system. "
+                "Analyze the case evidence according to EC_POLICY_V2 rules and confirm the primary issue and resolution."
+            )
+            user_prompt = (
+                f"Order ID: {order_id}\nOrder Status: {order_status}\n"
+                f"Late Delivery: {is_late_delivery}, Late Sellers: {late_seller_ids}\n"
+                f"Payment Total: {payment_total_brl} BRL, Expected: {order_product_info.get('expected_total_brl')} BRL, Reconciled: {reconciled}\n"
+                f"Evaluated Primary Issue: {primary_issue}, Refund: {recommended_refund_brl} BRL\n"
+                "Provide your policy reasoning."
+            )
 
-        llm_resp = self.llm_client.generate_reasoning(sys_prompt, user_prompt, max_tokens=256)
+            llm_resp = self.llm_client.generate_reasoning(sys_prompt, user_prompt, max_tokens=256)
+            llm_policy_reasoning = llm_resp.get("reasoning", "")
+            llm_policy_content = llm_resp.get("content", "")
 
         return {
             "primary_issue": primary_issue,
@@ -153,6 +157,6 @@ class PolicyAgent:
             "recommended_refund_brl": recommended_refund_brl,
             "resolution_actions": actions,
             "evidence_ids": evidence_ids,
-            "llm_policy_reasoning": llm_resp.get("reasoning", ""),
-            "llm_policy_content": llm_resp.get("content", ""),
+            "llm_policy_reasoning": llm_policy_reasoning,
+            "llm_policy_content": llm_policy_content,
         }

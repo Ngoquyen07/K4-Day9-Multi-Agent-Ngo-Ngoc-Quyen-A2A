@@ -2,46 +2,52 @@
   "case_id": "EC_025",
   "case_assessment": {
     "primary_issue": "unsupported_late_claim",
-    "secondary_issues": [],
+    "secondary_issues": [
+      "multi_item_order",
+      "repeat_customer"
+    ],
     "case_status": "no_action",
     "confidence": 0.95
   },
   "affected_entities": {
     "order_ids": [
-      "f3e7c359154d965827355f39d6b1fdac"
+      "4cf6a6de996beb9d4b190c7983be98d9"
     ],
     "item_ids": [
-      "f3e7c359154d965827355f39d6b1fdac:1"
+      "4cf6a6de996beb9d4b190c7983be98d9:1",
+      "4cf6a6de996beb9d4b190c7983be98d9:2"
     ],
     "seller_ids": [
-      "55c26bcb609f480eb7868594245febb5"
+      "1f50f920176fa81dab994f9023523100"
     ],
     "payment_ids": [
-      "f3e7c359154d965827355f39d6b1fdac:1"
+      "4cf6a6de996beb9d4b190c7983be98d9:1"
     ]
   },
   "customer_context": {
-    "customer_unique_id": "9c9242ad7f1b52d926ea76778e1c0c57",
-    "related_order_ids": []
+    "customer_unique_id": "4b979b432abe14a88cd0cde893952677",
+    "related_order_ids": [
+      "4e3cf72d676f793f15859c9ae34be2ad"
+    ]
   },
   "product_context": {
     "product_ids": [
-      "e99d69efe684efaa643f99805f7c81bc"
+      "0bcc3eeca39e1064258aa1e932269894"
     ],
     "category_names": [
-      "stationery"
+      "garden_tools"
     ]
   },
   "delivery_analysis": {
-    "delivered_at": "2018-08-13 18:24:27",
-    "estimated_delivery_at": "2018-08-17 00:00:00",
-    "carrier_handoff_at": "2018-08-10 12:29:00",
-    "delivery_variance_hours": -77.59,
+    "delivered_at": "2017-10-12 17:43:26",
+    "estimated_delivery_at": "2017-10-27 00:00:00",
+    "carrier_handoff_at": "2017-10-09 21:24:10",
+    "delivery_variance_hours": -342.28,
     "seller_handoff_analysis": [
       {
-        "seller_id": "55c26bcb609f480eb7868594245febb5",
-        "shipping_limit_at": "2018-08-14 03:24:51",
-        "handoff_variance_hours": -86.93,
+        "seller_id": "1f50f920176fa81dab994f9023523100",
+        "shipping_limit_at": "2017-10-10 18:28:22",
+        "handoff_variance_hours": -21.07,
         "late_handoff": false
       }
     ],
@@ -49,14 +55,14 @@
   },
   "payment_reconciliation": {
     "currency": "BRL",
-    "item_total_brl": 89.9,
-    "freight_total_brl": 14.21,
-    "expected_total_brl": 104.11,
-    "payment_total_brl": 104.11,
+    "item_total_brl": 119.8,
+    "freight_total_brl": 26.88,
+    "expected_total_brl": 146.68,
+    "payment_total_brl": 146.68,
     "difference_brl": 0.0,
     "reconciled": true,
     "payment_types": [
-      "boleto"
+      "credit_card"
     ]
   },
   "root_cause_analysis": {
@@ -69,9 +75,10 @@
     "responsible_parties": []
   },
   "evidence_ids": [
-    "order:f3e7c359154d965827355f39d6b1fdac",
-    "item:f3e7c359154d965827355f39d6b1fdac:1",
-    "payment:f3e7c359154d965827355f39d6b1fdac:1",
+    "order:4cf6a6de996beb9d4b190c7983be98d9",
+    "item:4cf6a6de996beb9d4b190c7983be98d9:1",
+    "item:4cf6a6de996beb9d4b190c7983be98d9:2",
+    "payment:4cf6a6de996beb9d4b190c7983be98d9:1",
     "policy:DELIVERY_WITHIN_ESTIMATE"
   ],
   "financial_resolution": {

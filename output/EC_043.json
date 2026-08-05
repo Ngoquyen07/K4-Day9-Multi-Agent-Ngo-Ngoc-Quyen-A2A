@@ -1,85 +1,79 @@
 {
   "case_id": "EC_043",
   "case_assessment": {
-    "primary_issue": "unsupported_late_claim",
-    "secondary_issues": [],
-    "case_status": "no_action",
+    "primary_issue": "unavailable_order_paid",
+    "secondary_issues": [
+      "repeat_customer"
+    ],
+    "case_status": "action_required",
     "confidence": 0.95
   },
   "affected_entities": {
     "order_ids": [
-      "948097deef559c742e7ce321e5e58919"
+      "e58fb7bfd033514475ab0883ded704f4"
     ],
-    "item_ids": [
-      "948097deef559c742e7ce321e5e58919:1"
-    ],
-    "seller_ids": [
-      "a3a38f4affed601eb87a97788c949667"
-    ],
+    "item_ids": [],
+    "seller_ids": [],
     "payment_ids": [
-      "948097deef559c742e7ce321e5e58919:1"
+      "e58fb7bfd033514475ab0883ded704f4:1"
     ]
   },
   "customer_context": {
-    "customer_unique_id": "4ca5f90433afb5493247f0bafb583483",
-    "related_order_ids": []
-  },
-  "product_context": {
-    "product_ids": [
-      "cd935d283d47f1050c505e1c39c48b67"
-    ],
-    "category_names": [
-      "sports_leisure"
+    "customer_unique_id": "8cda74bcb48b709a90e5441e19b1d759",
+    "related_order_ids": [
+      "ceb533871105f7cda81fafc19e1ee38e"
     ]
   },
+  "product_context": {
+    "product_ids": [],
+    "category_names": []
+  },
   "delivery_analysis": {
-    "delivered_at": "2017-08-12 14:08:40",
-    "estimated_delivery_at": "2017-09-01 00:00:00",
-    "carrier_handoff_at": "2017-08-07 17:52:01",
-    "delivery_variance_hours": -465.86,
-    "seller_handoff_analysis": [
-      {
-        "seller_id": "a3a38f4affed601eb87a97788c949667",
-        "shipping_limit_at": "2017-08-10 17:25:11",
-        "handoff_variance_hours": -71.55,
-        "late_handoff": false
-      }
-    ],
+    "delivered_at": null,
+    "estimated_delivery_at": "2017-11-10 00:00:00",
+    "carrier_handoff_at": null,
+    "delivery_variance_hours": null,
+    "seller_handoff_analysis": [],
     "late_handoff_seller_ids": []
   },
   "payment_reconciliation": {
     "currency": "BRL",
-    "item_total_brl": 69.9,
-    "freight_total_brl": 25.77,
-    "expected_total_brl": 95.67,
-    "payment_total_brl": 95.67,
-    "difference_brl": 0.0,
-    "reconciled": true,
+    "item_total_brl": null,
+    "freight_total_brl": null,
+    "expected_total_brl": null,
+    "payment_total_brl": 18.37,
+    "difference_brl": null,
+    "reconciled": null,
     "payment_types": [
-      "credit_card"
+      "boleto"
     ]
   },
   "root_cause_analysis": {
     "ranked_causes": [
       {
-        "cause_code": "DELIVERY_WITHIN_ESTIMATE",
+        "cause_code": "ORDER_UNAVAILABLE_AFTER_PAYMENT",
         "rank": 1
       }
     ],
-    "responsible_parties": []
+    "responsible_parties": [
+      {
+        "party_type": "platform",
+        "party_id": "OLIST_PLATFORM"
+      }
+    ]
   },
   "evidence_ids": [
-    "order:948097deef559c742e7ce321e5e58919",
-    "item:948097deef559c742e7ce321e5e58919:1",
-    "payment:948097deef559c742e7ce321e5e58919:1",
-    "policy:DELIVERY_WITHIN_ESTIMATE"
+    "order:e58fb7bfd033514475ab0883ded704f4",
+    "payment:e58fb7bfd033514475ab0883ded704f4:1",
+    "policy:ORDER_UNAVAILABLE_AFTER_PAYMENT"
   ],
   "financial_resolution": {
     "currency": "BRL",
-    "recommended_refund_brl": 0.0
+    "recommended_refund_brl": 18.37
   },
   "resolution_actions": [
-    "reject_late_refund",
+    "issue_full_refund",
+    "verify_refund_completion",
     "verify_payment_allocation"
   ]
 }

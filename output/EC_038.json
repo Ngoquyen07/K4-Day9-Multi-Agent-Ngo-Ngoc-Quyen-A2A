@@ -2,46 +2,52 @@
   "case_id": "EC_038",
   "case_assessment": {
     "primary_issue": "unsupported_late_claim",
-    "secondary_issues": [],
+    "secondary_issues": [
+      "multi_item_order",
+      "repeat_customer"
+    ],
     "case_status": "no_action",
     "confidence": 0.95
   },
   "affected_entities": {
     "order_ids": [
-      "5acce57f8d9dfd55fa48e212a641a69d"
+      "efcd8852328a37fca811747c09c6fb69"
     ],
     "item_ids": [
-      "5acce57f8d9dfd55fa48e212a641a69d:1"
+      "efcd8852328a37fca811747c09c6fb69:1",
+      "efcd8852328a37fca811747c09c6fb69:2"
     ],
     "seller_ids": [
-      "85d9eb9ddc5d00ca9336a2219c97bb13"
+      "520b493b57809f446cb0a233bb3e25c7"
     ],
     "payment_ids": [
-      "5acce57f8d9dfd55fa48e212a641a69d:1"
+      "efcd8852328a37fca811747c09c6fb69:1"
     ]
   },
   "customer_context": {
-    "customer_unique_id": "f1f4f45c8602d0db1329eed1c8e935d4",
-    "related_order_ids": []
+    "customer_unique_id": "9b7fcfa05fb6f8b88fea3d74a6ba77d6",
+    "related_order_ids": [
+      "44d14514a06127f72cd96745ed0eed21"
+    ]
   },
   "product_context": {
     "product_ids": [
-      "0cd9f302c8a5b076ffa5c3567c6705fd"
+      "cf8c83ef74f69705d1bec196473b1b45"
     ],
     "category_names": [
-      "computers_accessories"
+      "bed_bath_table"
     ]
   },
   "delivery_analysis": {
-    "delivered_at": "2017-08-08 21:24:41",
-    "estimated_delivery_at": "2017-08-22 00:00:00",
-    "carrier_handoff_at": "2017-08-03 18:32:48",
-    "delivery_variance_hours": -314.59,
+    "delivered_at": "2017-05-24 15:05:49",
+    "estimated_delivery_at": "2017-06-02 00:00:00",
+    "carrier_handoff_at": "2017-05-22 12:48:50",
+    "delivery_variance_hours": -200.9,
     "seller_handoff_analysis": [
       {
-        "seller_id": "85d9eb9ddc5d00ca9336a2219c97bb13",
-        "shipping_limit_at": "2017-08-08 02:56:02",
-        "handoff_variance_hours": -104.39,
+        "seller_id": "520b493b57809f446cb0a233bb3e25c7",
+        "shipping_limit_at": "2017-05-25 09:31:35",
+        "handoff_variance_hours": -68.71,
         "late_handoff": false
       }
     ],
@@ -49,14 +55,14 @@
   },
   "payment_reconciliation": {
     "currency": "BRL",
-    "item_total_brl": 27.9,
-    "freight_total_brl": 15.1,
-    "expected_total_brl": 43.0,
-    "payment_total_brl": 43.0,
+    "item_total_brl": 40.0,
+    "freight_total_brl": 19.88,
+    "expected_total_brl": 59.88,
+    "payment_total_brl": 59.88,
     "difference_brl": 0.0,
     "reconciled": true,
     "payment_types": [
-      "boleto"
+      "credit_card"
     ]
   },
   "root_cause_analysis": {
@@ -69,9 +75,10 @@
     "responsible_parties": []
   },
   "evidence_ids": [
-    "order:5acce57f8d9dfd55fa48e212a641a69d",
-    "item:5acce57f8d9dfd55fa48e212a641a69d:1",
-    "payment:5acce57f8d9dfd55fa48e212a641a69d:1",
+    "order:efcd8852328a37fca811747c09c6fb69",
+    "item:efcd8852328a37fca811747c09c6fb69:1",
+    "item:efcd8852328a37fca811747c09c6fb69:2",
+    "payment:efcd8852328a37fca811747c09c6fb69:1",
     "policy:DELIVERY_WITHIN_ESTIMATE"
   ],
   "financial_resolution": {

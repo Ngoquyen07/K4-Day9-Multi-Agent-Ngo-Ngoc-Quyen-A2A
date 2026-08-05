@@ -1,58 +1,54 @@
 {
   "case_id": "EC_030",
   "case_assessment": {
-    "primary_issue": "unsupported_late_claim",
-    "secondary_issues": [],
-    "case_status": "no_action",
+    "primary_issue": "canceled_order_paid",
+    "secondary_issues": [
+      "multi_item_order"
+    ],
+    "case_status": "action_required",
     "confidence": 0.95
   },
   "affected_entities": {
     "order_ids": [
-      "ecab90c9933c58908d3d6add7c6f5ae3"
+      "676e40056867189a1b3599f3e646f421"
     ],
     "item_ids": [
-      "ecab90c9933c58908d3d6add7c6f5ae3:1"
+      "676e40056867189a1b3599f3e646f421:1",
+      "676e40056867189a1b3599f3e646f421:2"
     ],
     "seller_ids": [
-      "f7720c4fa8e3aba4546301ab80ea1f1b"
+      "38e679b9e0064cd94c6f035707344dae"
     ],
     "payment_ids": [
-      "ecab90c9933c58908d3d6add7c6f5ae3:1"
+      "676e40056867189a1b3599f3e646f421:1"
     ]
   },
   "customer_context": {
-    "customer_unique_id": "1428917cd397d4f9ac0fde76dd6f2266",
+    "customer_unique_id": "0e627c648d467c22ca73b5e9c4040167",
     "related_order_ids": []
   },
   "product_context": {
     "product_ids": [
-      "c0db539123a403f670c50237d970b215"
+      "30a6a74ad9391b95bfc088f875ce8cfc"
     ],
     "category_names": [
-      "garden_tools"
+      "sports_leisure"
     ]
   },
   "delivery_analysis": {
-    "delivered_at": "2018-03-27 23:29:14",
-    "estimated_delivery_at": "2018-04-13 00:00:00",
-    "carrier_handoff_at": "2018-02-26 22:28:50",
-    "delivery_variance_hours": -384.51,
-    "seller_handoff_analysis": [
-      {
-        "seller_id": "f7720c4fa8e3aba4546301ab80ea1f1b",
-        "shipping_limit_at": "2018-03-01 14:28:03",
-        "handoff_variance_hours": -63.99,
-        "late_handoff": false
-      }
-    ],
+    "delivered_at": null,
+    "estimated_delivery_at": "2017-05-03 00:00:00",
+    "carrier_handoff_at": null,
+    "delivery_variance_hours": null,
+    "seller_handoff_analysis": [],
     "late_handoff_seller_ids": []
   },
   "payment_reconciliation": {
     "currency": "BRL",
-    "item_total_brl": 30.1,
-    "freight_total_brl": 33.24,
-    "expected_total_brl": 63.34,
-    "payment_total_brl": 63.34,
+    "item_total_brl": 50.36,
+    "freight_total_brl": 31.12,
+    "expected_total_brl": 81.48,
+    "payment_total_brl": 81.48,
     "difference_brl": 0.0,
     "reconciled": true,
     "payment_types": [
@@ -62,24 +58,31 @@
   "root_cause_analysis": {
     "ranked_causes": [
       {
-        "cause_code": "DELIVERY_WITHIN_ESTIMATE",
+        "cause_code": "ORDER_CANCELED_AFTER_PAYMENT",
         "rank": 1
       }
     ],
-    "responsible_parties": []
+    "responsible_parties": [
+      {
+        "party_type": "platform",
+        "party_id": "OLIST_PLATFORM"
+      }
+    ]
   },
   "evidence_ids": [
-    "order:ecab90c9933c58908d3d6add7c6f5ae3",
-    "item:ecab90c9933c58908d3d6add7c6f5ae3:1",
-    "payment:ecab90c9933c58908d3d6add7c6f5ae3:1",
-    "policy:DELIVERY_WITHIN_ESTIMATE"
+    "order:676e40056867189a1b3599f3e646f421",
+    "item:676e40056867189a1b3599f3e646f421:1",
+    "item:676e40056867189a1b3599f3e646f421:2",
+    "payment:676e40056867189a1b3599f3e646f421:1",
+    "policy:ORDER_CANCELED_AFTER_PAYMENT"
   ],
   "financial_resolution": {
     "currency": "BRL",
-    "recommended_refund_brl": 0.0
+    "recommended_refund_brl": 81.48
   },
   "resolution_actions": [
-    "reject_late_refund",
+    "issue_full_refund",
+    "verify_refund_completion",
     "verify_payment_allocation"
   ]
 }
